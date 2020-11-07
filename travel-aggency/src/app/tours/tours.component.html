@@ -1,0 +1,35 @@
+<p>tours works!</p>
+
+<span [ngClass]="allReservedPlaces > 10 ? 'bg-success' : 'bg-danger'">Reserved places: {{allReservedPlaces}}</span>
+
+<div>
+  <div class="container border m-1"
+       [ngClass]=" tour.price == maxPrice ? 'border-success' : tour.price == minPrice ? 'border-danger' : 'border-dark'"
+       *ngFor="let tour of tours">
+    <div class="row" [ngClass]="tour.places - tour.reservePlaces > 3 ? 'bg-light' : 'bg-warning'">
+      <div class="col-sm">
+        <p>Name: {{tour.name.toUpperCase()}}</p>
+        <p>Country: {{tour.country.toUpperCase()}}</p>
+        <p>Start date: {{tour.startDate | date:'mediumDate'}}</p>
+        <p>End date: {{tour.endDate  | date:'mediumDate'}}</p>
+        <p>Price: {{tour.price}} &#8364;</p>
+      </div>
+      <div class="col-sm">
+        {{tour.description}}
+      </div>
+      <div class="col-sm">
+        <img  src="{{tour.pictureLink}}" class="rounded-circle mt-1" alt="Cinque Terre">
+      </div>
+      <div class="col-sm">
+        <p *ngIf="tour.places - tour.reservePlaces > 0"> Available places : {{tour.places - tour.reservePlaces}}</p>
+        <p class="text-danger" *ngIf="tour.places - tour.reservePlaces <= 0"> No spots left</p>
+        <button *ngIf="tour.places - tour.reservePlaces > 0" class="btn btn-success" type="button"
+                (click)="reservePlace(tour)">Reserve
+        </button>
+        <button *ngIf="tour.reservePlaces > 0" type="button" class="btn btn-danger" (click)="resignationPlace(tour)">
+          Resigne
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
