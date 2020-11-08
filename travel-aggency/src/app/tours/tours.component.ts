@@ -12,8 +12,7 @@ export class ToursComponent implements OnInit {
   allReservedPlaces = 0;
   maxPrice: number;
   minPrice = 0;
-  link = 'https://zielonamapa.pl/wp-content/uploads/flickr/portofino-opinie-200x200.jpg'
-  link2 = 'https://podroze.smcloud.net/t/photos/t/140997/wlochy-nad-najstarsza-dzielnica-civita-goruje_1083369.jpg'
+
 
   constructor() {
   }
@@ -53,7 +52,7 @@ export class ToursComponent implements OnInit {
     tour.endDate = new Date(2020, 3, 30);
     tour.price = 400;
     tour.places = 40;
-    tour.pictureLink = this.link
+    tour.pictureLink = 'https://i.ibb.co/KKPMzFr/italy1.jpg'
     const tour1: Tour = new Tour();
     tour1.name = 'Italy tour';
     tour1.country = 'Italy';
@@ -62,7 +61,7 @@ export class ToursComponent implements OnInit {
     tour1.endDate = new Date(2020, 3, 30)
     tour1.price = 1203;
     tour1.places = 35;
-    tour1.pictureLink = this.link
+    tour1.pictureLink = 'https://i.ibb.co/KKPMzFr/italy2.jpg'
     const tour3: Tour = new Tour();
     tour3.name = 'Spain tour';
     tour3.country = 'Hiszpania';
@@ -71,7 +70,7 @@ export class ToursComponent implements OnInit {
     tour3.startDate = new Date(2020, 3, 23);
     tour3.price = 600;
     tour3.places = 20;
-    tour3.pictureLink = this.link
+    tour3.pictureLink = 'https://i.ibb.co/KKPMzFr/italy1.jpg'
     this.tours.push(tour);
     this.tours.push(tour1);
     this.tours.push(tour3)
