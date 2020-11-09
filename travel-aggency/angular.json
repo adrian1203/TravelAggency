@@ -18,7 +18,7 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "aot": false,
+            "aot": true,
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -41,7 +41,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -121,6 +120,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "travel-aggency"
+    }
+  },
+  "defaultProject": "travel-aggency",
+  "cli": {
+    "analytics": "190255b7-79d8-4d7b-bf36-f96aa1e7a316"
+  }
 }

@@ -1,0 +1,11 @@
+<p>tours works!</p>
+
+<span [ngClass]="allReservedPlaces > 10 ? 'bg-success' : 'bg-danger'">Reserved places: {{allReservedPlaces}}</span>
+
+  <div class="row justify-content-center">
+  <div class="container border m-1"
+       [ngClass]=" tour.price == maxPrice ? 'border-success' : tour.price == minPrice ? 'border-danger' : 'border-dark'"
+       *ngFor="let tour of tours">
+    <app-tour  (deleted)="deleteTour(tour)" (reserve)="countReservedPlaces()" [tour]="tour"></app-tour>
+  </div>
+</div>

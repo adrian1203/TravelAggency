@@ -1,0 +1,38 @@
+<div class="row" [ngClass]="tour.places - tour.reservePlaces > 3 ? 'bg-light' : 'bg-warning'">
+  <div class="col-sm">
+    <p>Name: {{tour.name.toUpperCase()}}</p>
+    <p>Country: {{tour.country.toUpperCase()}}</p>
+    <p>Start date: {{tour.startDate | date:'mediumDate'}}</p>
+    <p>End date: {{tour.endDate  | date:'mediumDate'}}</p>
+    <p>Price: {{tour.price}} &#8364;</p>
+    <p>Ocena: {{opinion}}</p>
+  </div>
+  <div class="col-sm">
+    {{tour.description}}
+  </div>
+  <div class="col-sm">
+    <img src="{{tour.pictureLink}}" class="rounded-circle mt-1" alt="Cinque Terre">
+  </div>
+  <div class="col-sm">
+    <p *ngIf="tour.places - tour.reservePlaces > 0"> Available places : {{tour.places - tour.reservePlaces}}</p>
+    <p class="text-danger" *ngIf="tour.places - tour.reservePlaces <= 0"> No spots left</p>
+    <button *ngIf="tour.places - tour.reservePlaces > 0" class="btn btn-success" type="button"
+            (click)="reservePlace(tour)">Reserve
+    </button>
+    <button *ngIf="tour.reservePlaces > 0" type="button" class="btn btn-danger" (click)="resignationPlace(tour)">
+      Resigne
+    </button>
+    <button type="button" class="btn btn-danger" (click)="deleteTour()">
+      Delete
+    </button>
+
+    <select [(ngModel)]="opinion">
+      <option [ngValue]="1"> Ocena 1  </option>
+      <option [ngValue]="2"> Ocena 2  </option>
+      <option [ngValue]="3"> Ocena 3  </option>
+      <option [ngValue]="4"> Ocena 4  </option>
+      <option [ngValue]="5"> Ocena 5  </option>
+
+    </select>
+  </div>
+</div>

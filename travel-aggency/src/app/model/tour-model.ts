@@ -1,4 +1,5 @@
 export class Tour {
+  id : number;
   name: string;
   country: string;
   startDate: Date;
