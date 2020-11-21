@@ -26,12 +26,19 @@
       Delete
     </button>
 
+    <button type="submit"
+            [routerLink]="['/tour-detail', tour.id]"
+            class="btn btn-info">
+      <span class="d-none d-md-inline">Detail</span>
+    </button>
+
+
     <select [(ngModel)]="opinion">
-      <option [ngValue]="1"> Ocena 1  </option>
-      <option [ngValue]="2"> Ocena 2  </option>
-      <option [ngValue]="3"> Ocena 3  </option>
-      <option [ngValue]="4"> Ocena 4  </option>
-      <option [ngValue]="5"> Ocena 5  </option>
+      <option [ngValue]="1"> Ocena 1</option>
+      <option [ngValue]="2"> Ocena 2</option>
+      <option [ngValue]="3"> Ocena 3</option>
+      <option [ngValue]="4"> Ocena 4</option>
+      <option [ngValue]="5"> Ocena 5</option>
 
     </select>
   </div>

@@ -1,0 +1,25 @@
+
+
+<button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+  <span>Back</span>
+</button>
+<div>
+  <div class="col-8">
+    <p>Name: {{tour.name.toUpperCase()}}</p>
+    <p>Country: {{tour.country.toUpperCase()}}</p>
+    <p>Start date: {{tour.startDate | date:'mediumDate'}}</p>
+    <p>End date: {{tour.endDate  | date:'mediumDate'}}</p>
+    <p>Price: {{tour.price}} &#8364;</p>
+  </div>
+
+</div>
+
+
+<div class="col-8">
+  <textarea class="form-control" placeholder="write a comment..." rows="3"></textarea>
+  <br>
+  <button type="button" class="btn btn-info pull-right">Post</button>
+</div>
+
+
+

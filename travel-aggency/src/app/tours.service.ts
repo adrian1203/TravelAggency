@@ -23,6 +23,7 @@ export class ToursService {
     tour.price = 400;
     tour.places = 40;
     tour.pictureLink = 'https://i.ibb.co/KKPMzFr/italy1.jpg'
+    tour.category = 'Domestic'
     const tour1: Tour = new Tour();
     tour1.id = 2;
     tour1.name = 'Italy tour';
@@ -33,6 +34,7 @@ export class ToursService {
     tour1.price = 1203;
     tour1.places = 35;
     tour1.pictureLink = 'https://i.ibb.co/KKPMzFr/italy2.jpg'
+    tour1.category = 'Europe Trip'
     const tour3: Tour = new Tour();
     tour3.id = 3;
     tour3.name = 'Spain tour';
@@ -43,6 +45,7 @@ export class ToursService {
     tour3.price = 600;
     tour3.places = 20;
     tour3.pictureLink = 'https://i.ibb.co/KKPMzFr/italy1.jpg';
+    tour3.category = 'Europe Trip'
 
     const tours: Array<Tour> = new Array<Tour>();
     tours.push(tour);
