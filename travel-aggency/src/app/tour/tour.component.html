@@ -5,13 +5,13 @@
     <p>Start date: {{tour.startDate | date:'mediumDate'}}</p>
     <p>End date: {{tour.endDate  | date:'mediumDate'}}</p>
     <p>Price: {{tour.price}} &#8364;</p>
-    <p>Ocena: {{opinion}}</p>
+    <p>My Opinion: {{opinion}}</p>
   </div>
   <div class="col-sm">
     {{tour.description}}
   </div>
   <div class="col-sm">
-    <img src="{{tour.pictureLink}}" class="rounded-circle mt-1" alt="Cinque Terre">
+    <img  [routerLink]="['/tour-detail', tour.id]"  src="{{tour.pictureLink}}" class="rounded-circle mt-1" alt="Cinque Terre">
   </div>
   <div class="col-sm">
     <p *ngIf="tour.places - tour.reservePlaces > 0"> Available places : {{tour.places - tour.reservePlaces}}</p>

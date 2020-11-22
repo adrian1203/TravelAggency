@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Tour} from './model/tour-model';
+import {Tour} from './model/app-models';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +13,10 @@ export class ToursService {
 
 
   getFakeDate(): Array<Tour> {
+    const gallery: Array<string> = new Array<string>();
+    gallery.push('https://i.ibb.co/KKPMzFr/italy1.jpg');
+    gallery.push('https://i.ibb.co/KKPMzFr/italy2.jpg');
+    gallery.push('https://i.ibb.co/KKPMzFr/italy2.jpg');
     const tour: Tour = new Tour();
     tour.id = 1;
     tour.name = 'Poland tour';
@@ -24,6 +28,8 @@ export class ToursService {
     tour.places = 40;
     tour.pictureLink = 'https://i.ibb.co/KKPMzFr/italy1.jpg'
     tour.category = 'Domestic'
+    tour.opinion = 4.5;
+    tour.gallery = gallery;
     const tour1: Tour = new Tour();
     tour1.id = 2;
     tour1.name = 'Italy tour';
@@ -35,6 +41,8 @@ export class ToursService {
     tour1.places = 35;
     tour1.pictureLink = 'https://i.ibb.co/KKPMzFr/italy2.jpg'
     tour1.category = 'Europe Trip'
+    tour1.opinion = 3.9;
+    tour1.gallery = gallery;
     const tour3: Tour = new Tour();
     tour3.id = 3;
     tour3.name = 'Spain tour';
@@ -46,7 +54,8 @@ export class ToursService {
     tour3.places = 20;
     tour3.pictureLink = 'https://i.ibb.co/KKPMzFr/italy1.jpg';
     tour3.category = 'Europe Trip'
-
+    tour3.opinion = 3.4;
+    tour3.gallery = gallery;
     const tours: Array<Tour> = new Array<Tour>();
     tours.push(tour);
     tours.push(tour1);

@@ -18,6 +18,7 @@ import {FilterComponent} from './filter/filter.component';
 import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
 import {ReactiveFormsModule} from '@angular/forms';
 import {Ng5SliderModule} from 'ng5-slider';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -42,9 +43,13 @@ import {Ng5SliderModule} from 'ng5-slider';
     NgMultiSelectDropDownModule.forRoot(),
     ReactiveFormsModule,
     Ng5SliderModule,
+    HttpClientModule
 
   ],
   providers: [
+    // { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+
   ],
   bootstrap: [AppComponent]
 })

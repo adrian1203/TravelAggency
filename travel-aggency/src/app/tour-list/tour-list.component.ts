@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Tour, TourFilter} from '../model/tour-model';
+import {Tour, TourFilter} from '../model/app-models';
 import {ToursService} from "../tours.service";
 
 
@@ -58,6 +58,14 @@ export class TourListComponent implements OnInit {
     );
     this.tours = this.tours.filter(e => {
         return filer.minPrice <= e.price;
+      }
+    );
+    this.tours = this.tours.filter(e => {
+        return filer.maxOpinion >= e.opinion;
+      }
+    );
+    this.tours = this.tours.filter(e => {
+        return filer.minOpinion <= e.opinion;
       }
     );
   }

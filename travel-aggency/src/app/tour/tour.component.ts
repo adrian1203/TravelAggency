@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Tour} from "../model/tour-model";
+import {Tour} from "../model/app-models";
 
 @Component({
   selector: 'app-tour',

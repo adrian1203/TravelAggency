@@ -1,11 +1,12 @@
 <span [ngClass]="allReservedPlaces > 10 ? 'bg-success' : 'bg-danger'">Reserved places: {{allReservedPlaces}}</span>
 
-<div style="margin: 20px">
-  <app-filter [tours]="tours" (categoryEvent)="filter($event)"></app-filter>
-
-</div>
-
 <div class="row justify-content-center">
+
+  <div class="container ">
+    <app-filter [tours]="tours" (categoryEvent)="filter($event)"></app-filter>
+
+  </div>
+
   <div class="container border m-1"
        [ngClass]=" tour.price == maxPrice ? 'border-success' : tour.price == minPrice ? 'border-danger' : 'border-dark'"
        *ngFor="let tour of tours">
