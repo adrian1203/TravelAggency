@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Tour} from "../model/app-models";
+import {ShoppingCartService} from "../shopping-cart.service";
 
 @Component({
   selector: 'app-tour',
@@ -14,7 +15,7 @@ export class TourComponent implements OnInit {
 
   opinion: number;
 
-  constructor() {
+  constructor(private shoppingCartService: ShoppingCartService) {
   }
 
   ngOnInit() {
@@ -22,6 +23,7 @@ export class TourComponent implements OnInit {
 
 
   reservePlace(tour: Tour) {
+    this.shoppingCartService.addTour(tour, 1);
     tour.reservePlaces = tour.reservePlaces + 1;
     this.reserve.emit();
   }

@@ -32,3 +32,14 @@ export class User {
   lastName: string;
   token: string;
 }
+
+
+export class Cart {
+  elements: CartElement[];
+}
+
+
+export class CartElement {
+  tour: Tour;
+  amount: number;
+}

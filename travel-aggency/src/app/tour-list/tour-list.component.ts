@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Tour, TourFilter} from '../model/app-models';
+import {Cart, Tour, TourFilter} from '../model/app-models';
 import {ToursService} from "../tours.service";
+import {ShoppingCartService} from "../shopping-cart.service";
 
 
 @Component({
@@ -14,8 +15,13 @@ export class TourListComponent implements OnInit {
   maxPrice: number;
   minPrice = 0;
 
+  cart: Cart;
 
-  constructor(private toursService: ToursService) {
+  constructor(private toursService: ToursService,
+              private shoppingCartService: ShoppingCartService) {
+
+    this.shoppingCartService.cart.subscribe(x => this.cart = x);
+
   }
 
   ngOnInit() {
@@ -31,9 +37,7 @@ export class TourListComponent implements OnInit {
   }
 
   deleteTour(tour: Tour) {
-    console.log(tour);
     this.tours = this.tours.filter(e => e !== tour);
-
   }
 
   getProducts() {

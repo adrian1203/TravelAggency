@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {User} from './model/app-models';
+import {Cart, User} from './model/app-models';
 import {AuthenticationService} from './autentication.service';
 
 
@@ -9,7 +9,7 @@ import {AuthenticationService} from './autentication.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   title = 'travel-aggency';
 
   currentUser: User;

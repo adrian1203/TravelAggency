@@ -19,6 +19,7 @@ import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
 import {ReactiveFormsModule} from '@angular/forms';
 import {Ng5SliderModule} from 'ng5-slider';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import { ShoppingCartViewComponent } from './shopping-cart-view/shopping-cart-view.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
     TourDetailComponent,
     RegistrationComponent,
     FilterComponent,
+    ShoppingCartViewComponent,
   ],
   imports: [
     BrowserModule,

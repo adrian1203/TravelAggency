@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Tour} from "../model/app-models";
+import {CartElement, Tour} from "../model/app-models";
+import {ShoppingCartService} from "../shopping-cart.service";
 
 @Component({
   selector: 'app-shopping-cart',
@@ -8,16 +9,14 @@ import {Tour} from "../model/app-models";
 })
 export class ShoppingCartComponent implements OnInit {
 
-  constructor() {
+  constructor(private shoppingCartService: ShoppingCartService) {
   }
 
-  orders: Map<Tour, number>;
+  cartElements: CartElement[];
 
   ngOnInit(): void {
+    this.cartElements = this.shoppingCartService.getCart().elements;
   }
 
-  addTour(tour: Tour) {
-
-  }
 
 }

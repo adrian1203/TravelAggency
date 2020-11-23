@@ -1,1 +1,9 @@
 <p>shopping-cart works!</p>
+
+<h2>My reservation</h2>
+<div>
+  <div *ngFor="let elem of cartElements">
+    <p>{{elem.tripId}}</p>
+    <p>{{elem.amount}}</p>
+  </div>
+</div>
