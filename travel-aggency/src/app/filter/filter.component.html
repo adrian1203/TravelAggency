@@ -1,0 +1,27 @@
+<div class="col-8">
+<div>
+  <form [formGroup]="myFormCategory">
+    <ng-multiselect-dropdown
+      name="category"
+      [settings]="dropdownSettingsCategory"
+      [placeholder]="'Select category'"
+      [data]="category"
+      formControlName="category"
+      [disabled]="disabledCategory"
+      (onSelect)="onItemSelectCategory($event)"
+      (onSelectAll)="onSelectAllCategory()"
+      (onDeSelect)="onDeSelectCategory($event)"
+    (onDeSelectAll)="onSelectAllCategory()" >
+    </ng-multiselect-dropdown>
+  </form>
+</div>
+
+<br>
+<div>
+  <ng5-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="optionsPrice" (userChangeEnd)="executeFilter()"></ng5-slider>
+</div>
+<br>
+<div>
+  <ng5-slider  [(value)]="minOpinion" [(highValue)]="maxOpinion" [options]="optionsOpinion" (userChangeEnd)="executeFilter()"></ng5-slider>
+</div>
+</div>
