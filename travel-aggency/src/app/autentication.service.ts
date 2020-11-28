@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {User} from "./model/app-models";
+import {ShoppingCartService} from "./shopping-cart.service";
 
 
 @Injectable({providedIn: 'root'})
@@ -10,7 +11,7 @@ export class AuthenticationService {
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private shoppingCartService: ShoppingCartService) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
   }
@@ -43,8 +44,12 @@ export class AuthenticationService {
   }
 
   logout() {
+
+    this.shoppingCartService.clearCart();
+
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
+
   }
 }

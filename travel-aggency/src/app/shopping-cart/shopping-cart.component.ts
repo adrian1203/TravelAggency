@@ -7,15 +7,23 @@ import {ShoppingCartService} from "../shopping-cart.service";
   templateUrl: './shopping-cart.component.html',
   styleUrls: ['./shopping-cart.component.css']
 })
-export class ShoppingCartComponent implements OnInit {
-
-  constructor(private shoppingCartService: ShoppingCartService) {
-  }
+export class ShoppingCartComponent {
 
   cartElements: CartElement[];
 
-  ngOnInit(): void {
-    this.cartElements = this.shoppingCartService.getCart().elements;
+  constructor(private shoppingCartService: ShoppingCartService) {
+    this.shoppingCartService.cart.subscribe(x => {
+      this.cartElements = x.elements;
+    });
+  }
+
+
+  removeReservation(cartElement: CartElement) {
+    this.shoppingCartService.removeTour(cartElement.tour);
+  }
+
+  clearCart() {
+    this.shoppingCartService.clearCart();
   }
 
 

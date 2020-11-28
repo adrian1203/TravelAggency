@@ -1,7 +1,11 @@
-<span [ngClass]="allReservedPlaces > 10 ? 'bg-success' : 'bg-danger'">Reserved places: {{allReservedPlaces}}</span>
 
 <div class="row justify-content-center">
 
+
+  <div class="containe justify-content-center ">
+    <span [ngClass]="allReservedPlaces > 10 ? 'bg-success' : 'bg-danger'">All reserved places: {{allReservedPlaces}}</span>
+
+  </div>
   <div class="container ">
     <app-filter [tours]="tours" (categoryEvent)="filter($event)"></app-filter>
 

@@ -4,14 +4,11 @@
 
 
     <a class="navbar-brand js-scroll-trigger" routerLink="/tour-list">Travel Aggency</a>
+<app-shopping-cart-view *ngIf="user!=null"></app-shopping-cart-view>
+
 
 
     <div>
-      <button type="submit"
-              [routerLink]="['/shopping-cart']"
-              class="btn btn-info">
-        <span class="d-none d-md-inline">Shopping Cart</span>
-      </button>
       <span>&nbsp</span>
 
       <button type="submit"

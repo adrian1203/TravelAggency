@@ -18,7 +18,6 @@ export class TourDetailComponent implements OnInit {
   constructor(
     private toursService: ToursService,
     private route: ActivatedRoute,
-    private shoppingCartService: ShoppingCartService,
   ) {
   }
 
@@ -27,7 +26,6 @@ export class TourDetailComponent implements OnInit {
     this.toruId = +this.route.snapshot.paramMap.get('id');
     this.getTour();
     this.getDates();
-    console.log(this.shoppingCartService.getCart());
   }
 
   getTour() {

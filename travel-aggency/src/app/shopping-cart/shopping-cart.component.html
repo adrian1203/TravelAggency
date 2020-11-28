@@ -1,9 +1,21 @@
-<p>shopping-cart works!</p>
+
+
+<div class="container justify-content-center">
 
 <h2>My reservation</h2>
-<div>
   <div *ngFor="let elem of cartElements">
-    <p>{{elem.tripId}}</p>
-    <p>{{elem.amount}}</p>
+    Tour name: <p>{{elem.tour.name}}</p>
+    Number of places: <p>{{elem.amount}}</p>
+    <button class="btn btn-danger" (click)="removeReservation(elem)">
+      <span class="d-none d-md-inline">Remove reservation</span>
+    </button>
   </div>
+  <br>
+  <button *ngIf="cartElements.length>0" class="btn btn-danger" (click)="clearCart()">
+    <span class="d-none d-md-inline">Remove all reservation</span>
+  </button>
+
+  <button *ngIf="cartElements.length>0" class="btn btn-success" routerLink="/booked-tour" >
+    <span class="d-none d-md-inline">Confirm reservation</span>
+  </button>
 </div>

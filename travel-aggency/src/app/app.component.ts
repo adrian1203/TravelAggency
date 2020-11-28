@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {Cart, User} from './model/app-models';
 import {AuthenticationService} from './autentication.service';
+import {ShoppingCartService} from "./shopping-cart.service";
 
 
 @Component({
