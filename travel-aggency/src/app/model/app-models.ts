@@ -24,9 +24,9 @@ export class TourFilter {
 
 }
 
-export class User {
+export class AppUser {
   id: number;
-  username: string;
+  email: string;
   password: string;
   firstName: string;
   lastName: string;

@@ -1,5 +1,5 @@
 import {Injectable, OnInit} from '@angular/core';
-import {Cart, CartElement, Tour, User} from './model/app-models';
+import {Cart, CartElement, Tour, AppUser} from './model/app-models';
 import {BehaviorSubject, Observable} from 'rxjs';
 
 @Injectable({

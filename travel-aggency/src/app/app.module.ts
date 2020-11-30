@@ -9,7 +9,7 @@ import {TourComponent} from './tour/tour.component';
 import {FormsModule} from '@angular/forms';
 import {NewTourComponent} from './new-tour/new-tour.component';
 import {NgbDatepickerModule} from '@ng-bootstrap/ng-bootstrap';
-import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {ShoppingCartComponent} from './shopping-cart/shopping-cart.component';
 import {BookedTourComponent} from './booked-tour/booked-tour.component';
 import {TourDetailComponent} from './tour-detail/tour-detail.component';
@@ -20,6 +20,11 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {Ng5SliderModule} from 'ng5-slider';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { ShoppingCartViewComponent } from './shopping-cart-view/shopping-cart-view.component';
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+import {AngularFireAuthModule} from '@angular/fire/auth';
+import {AngularFireModule} from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import {environment} from '../environments/environment';
 
 
 @NgModule({
@@ -35,6 +40,7 @@ import { ShoppingCartViewComponent } from './shopping-cart-view/shopping-cart-vi
     RegistrationComponent,
     FilterComponent,
     ShoppingCartViewComponent,
+    AdminPanelComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,8 +51,10 @@ import { ShoppingCartViewComponent } from './shopping-cart-view/shopping-cart-vi
     NgMultiSelectDropDownModule.forRoot(),
     ReactiveFormsModule,
     Ng5SliderModule,
-    HttpClientModule
-
+    HttpClientModule,
+    AngularFireAuthModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireDatabaseModule
   ],
   providers: [
     // { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

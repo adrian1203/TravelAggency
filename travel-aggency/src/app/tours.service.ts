@@ -1,5 +1,7 @@
 import {Injectable} from '@angular/core';
-import {Tour} from './model/app-models';
+import {AppUser, Tour} from './model/app-models';
+import {AngularFireDatabase, AngularFireList, AngularFireObject} from '@angular/fire/database';
+
 
 @Injectable({
   providedIn: 'root'
@@ -7,8 +9,9 @@ import {Tour} from './model/app-models';
 export class ToursService {
 
   loremTest = ' is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book';
+  public data: AngularFireList<any[]>;
 
-  constructor() {
+  constructor(private db: AngularFireDatabase) {
   }
 
 
@@ -68,8 +71,24 @@ export class ToursService {
 
 
   getProducts(): Array<Tour> {
+    console.log(this.getFakeDate());
+
+    console.log(this.db.list('/ztwprojekt/users').valueChanges().subscribe(e => console.log(e)));
+    this.data = this.db.list('ztwprojekt');
+    const user: AppUser = new AppUser();
+    user.firstName = 'Adrian';
+    user.lastName = 'Opiela';
+    user.email = 'travel@gmail.cowwm'
+    user.password = 'waa'
+    user.id = 1;
+    // const tmp = this.db.object('ztwprojekt/users/1').set(user);
+    // console.log(tmp);
+    // this.db.list('/ztwprojekt/users/').
+    // this.db.list('MNEdoTI4wvlpkCZtucS').valueChanges();
+    // console.log(this.db.object('ztwprojekt/MNEdf4Zcs95fWioq9Jn'));
     return this.getFakeDate();
   }
+
 
   getProduct(id: number): Tour {
     return this.getFakeDate().filter(e => e.id === id)[0];

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {User} from "../model/app-models";
+import {AppUser} from "../model/app-models";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {first} from "rxjs/operators";
 import {AuthenticationService} from "../autentication.service";
@@ -49,12 +49,16 @@ export class RegistrationComponent implements OnInit {
     });
 
     // get return url from route parameters or default to '/'
-  //  this.returnUrl = this.route.snapshot.queryParams['tour-list'] || '/';
+    //  this.returnUrl = this.route.snapshot.queryParams['tour-list'] || '/';
   }
 
   // convenience getter for easy access to form fields
   get f() {
     return this.loginForm.controls;
+  }
+
+  get r() {
+    return this.registerForm.controls;
   }
 
   onSubmitLogin() {
@@ -66,31 +70,49 @@ export class RegistrationComponent implements OnInit {
     }
 
     this.loadingLogin = true;
-    // this.authenticationService.login(this.f.username.value, this.f.password.value)
-    //   .pipe(first())
-    //   .subscribe(
-    //     data => {
-    //       this.router.navigate([this.returnUrl]);
-    //     },
-    //     error => {
-    //       this.alertService.error(error);
-    //       this.loading = false;
-    //     });
+    const retValue = this.authenticationService.login(this.f.username.value, this.f.password.value);
 
-    this.authenticationService.loginTmp();
-    this.router.navigate(['./tour-list']);
+    console.log(retValue);
+    if (retValue === true) {
+      this.router.navigate([this.returnUrl]);
+
+    } else {
+      // this.alertService.error();
+      this.loading = false;
+      this.submittedLogin = false;
+    }
+
+
+    // this.authenticationService.loginTmp(this.f.username.value, this.f.password.value);
+    // this.router.navigate(['./tour-list']);
 
   }
 
   onSubmit() {
     this.submitted = true;
 
-    // stop here if form is invalid
     if (this.registerForm.invalid) {
       return;
     }
 
+    const user: AppUser = new AppUser();
+    user.firstName = this.r.firstName.value;
+    user.lastName = this.r.lastName.value;
+    user.email = this.r.username.value;
+    user.password = this.r.password.value;
+
     this.loading = true;
+
+    const retValue = this.authenticationService.register(user);
+    if (retValue === true) {
+     // this.authenticationService.login(user.email, user.password);
+      this.router.navigate(['./tour-list']);
+
+    }else {
+      // this.alertService.error();
+      this.loading = false;
+      this.submittedLogin = false;
+    }
     // this.userService.register(this.registerForm.value)
     //   .pipe(first())
     //   .subscribe(

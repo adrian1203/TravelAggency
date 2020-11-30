@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {Cart, User} from './model/app-models';
+import {Cart, AppUser} from './model/app-models';
 import {AuthenticationService} from './autentication.service';
 import {ShoppingCartService} from "./shopping-cart.service";
 
@@ -13,7 +13,7 @@ import {ShoppingCartService} from "./shopping-cart.service";
 export class AppComponent implements OnInit {
   title = 'travel-aggency';
 
-  currentUser: User;
+  currentUser: AppUser;
 
   constructor(private router: Router,
               private authenticationService: AuthenticationService) {
