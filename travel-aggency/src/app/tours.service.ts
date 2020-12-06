@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {AppUser, Tour} from './model/app-models';
+import {AppUser, Tour, TourInstance} from './model/app-models';
 import {AngularFireDatabase, AngularFireList, AngularFireObject} from '@angular/fire/database';
 
 
@@ -20,6 +20,15 @@ export class ToursService {
     gallery.push('https://i.ibb.co/KKPMzFr/italy1.jpg');
     gallery.push('https://i.ibb.co/KKPMzFr/italy2.jpg');
     gallery.push('https://i.ibb.co/KKPMzFr/italy2.jpg');
+
+
+    const tourInstances: Array<TourInstance> = new Array<TourInstance>();
+    const tourInstance: TourInstance = new TourInstance();
+    tourInstance.startDate = new Date(2020, 3, 23);
+    tourInstance.startDate = new Date(2020, 3, 30);
+    tourInstance.reservedPlace = 0;
+    tourInstances.push(tourInstance);
+
     const tour: Tour = new Tour();
     tour.id = 1;
     tour.name = 'Poland tour';
@@ -33,6 +42,7 @@ export class ToursService {
     tour.category = 'Domestic'
     tour.opinion = 4.5;
     tour.gallery = gallery;
+    tour.tourInstances = tourInstances;
     const tour1: Tour = new Tour();
     tour1.id = 2;
     tour1.name = 'Italy tour';
@@ -46,6 +56,7 @@ export class ToursService {
     tour1.category = 'Europe Trip'
     tour1.opinion = 3.9;
     tour1.gallery = gallery;
+    tour1.tourInstances = tourInstances;
     const tour3: Tour = new Tour();
     tour3.id = 3;
     tour3.name = 'Spain tour';
@@ -59,6 +70,7 @@ export class ToursService {
     tour3.category = 'Europe Trip'
     tour3.opinion = 3.4;
     tour3.gallery = gallery;
+    tour3.tourInstances = tourInstances;
     const tours: Array<Tour> = new Array<Tour>();
     tours.push(tour);
     tours.push(tour1);

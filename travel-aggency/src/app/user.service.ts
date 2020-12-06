@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {AppUser} from './model/app-models';
 import {AngularFireDatabase, AngularFireList} from "@angular/fire/database";
-
+import {Observable} from "rxjs";
 
 
 @Injectable({providedIn: 'root'})
@@ -18,24 +18,24 @@ export class UserService {
     return this.http.get<AppUser[]>(`/users`);
   }
 
-  register(user: AppUser, uid: number) {
-    this.db.object('ztwprojekt/users/' + uid).set(user);
+  register(user: AppUser, uid: string) {
+    return this.db.object('ztwprojekt/users/' + uid).set(user);
   }
 
   delete(id: number) {
     return this.http.delete(`/users/${id}`);
   }
 
-  public getUser(uid: string): AppUser {
+  public getUser(uid: string): Observable<any> {
 
-    const obser = this.db.object('ztwprojekt/users/' + uid).valueChanges();
+    return this.db.object('ztwprojekt/users/' + uid).valueChanges();
 
-    let user: AppUser = new AppUser();
-    obser.subscribe(e => {
-      user = e as AppUser;
-      console.log(user);
-    });
-    return user;
+    // let user: AppUser = new AppUser();
+    // obser.subscribe(e => {
+    //   user = e as AppUser;
+    //   console.log(user);
+    // });
+    // return user;
 
 
   }

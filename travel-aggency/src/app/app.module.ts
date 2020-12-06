@@ -25,6 +25,8 @@ import {AngularFireAuthModule} from '@angular/fire/auth';
 import {AngularFireModule} from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import {environment} from '../environments/environment';
+import { AlertComponent } from './alert/alert.component';
+import { ReservationPopupComponent } from './reservation-popup/reservation-popup.component';
 
 
 @NgModule({
@@ -41,6 +43,8 @@ import {environment} from '../environments/environment';
     FilterComponent,
     ShoppingCartViewComponent,
     AdminPanelComponent,
+    AlertComponent,
+    ReservationPopupComponent,
   ],
   imports: [
     BrowserModule,

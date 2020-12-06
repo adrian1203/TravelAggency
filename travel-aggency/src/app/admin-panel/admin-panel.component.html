@@ -1,1 +1,11 @@
 <p>admin-panel works!</p>
+
+
+<div>
+  <button type="submit" [routerLink]="['/new-tour']"
+          class="btn btn-success">
+    <span class="d-none d-md-inline">Create new tour</span>
+  </button>
+</div>
+<app-tour-list [isAdminView]="true"></app-tour-list>
+

@@ -7,13 +7,13 @@
 
   </div>
   <div class="container ">
-    <app-filter [tours]="tours" (categoryEvent)="filter($event)"></app-filter>
+    <app-filter *ngIf="isAdminView!=true" [tours]="tours" (categoryEvent)="filter($event)"></app-filter>
 
   </div>
 
   <div class="container border m-1"
        [ngClass]=" tour.price == maxPrice ? 'border-success' : tour.price == minPrice ? 'border-danger' : 'border-dark'"
        *ngFor="let tour of tours">
-    <app-tour (deleted)="deleteTour(tour)" (reserve)="countReservedPlaces()" [tour]="tour"></app-tour>
+    <app-tour (deleted)="deleteTour(tour)" (reserve)="countReservedPlaces()" [tour]="tour" [isAdminView]="isAdminView"></app-tour>
   </div>
 </div>

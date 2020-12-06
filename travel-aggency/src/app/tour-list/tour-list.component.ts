@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Cart, Tour, TourFilter} from '../model/app-models';
 import {ToursService} from "../tours.service";
 import {ShoppingCartService} from "../shopping-cart.service";
@@ -14,6 +14,7 @@ export class TourListComponent implements OnInit {
   allReservedPlaces = 0;
   maxPrice: number;
   minPrice = 0;
+  @Input() isAdminView: boolean;
 
   cart: Cart;
 

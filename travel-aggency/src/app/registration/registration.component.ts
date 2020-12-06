@@ -5,6 +5,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {first} from "rxjs/operators";
 import {AuthenticationService} from "../autentication.service";
 import {AlertService} from "../alert.service";
+import {UserService} from "../user.service";
 
 @Component({
   selector: 'app-registration',
@@ -17,7 +18,6 @@ export class RegistrationComponent implements OnInit {
   loginForm: FormGroup;
   loadingLogin = false;
   submittedLogin = false;
-  returnUrl: string;
 
   registerForm: FormGroup;
   loading = false;
@@ -28,7 +28,8 @@ export class RegistrationComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private userService: UserService,
   ) {
     // redirect to home if already logged in
     if (this.authenticationService.currentUserValue) {
@@ -38,18 +39,15 @@ export class RegistrationComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
+      email: ['', Validators.required, Validators.email],
       password: ['', Validators.required]
     });
     this.registerForm = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      username: ['', Validators.required],
+      email: ['', Validators.required, Validators.email],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
-
-    // get return url from route parameters or default to '/'
-    //  this.returnUrl = this.route.snapshot.queryParams['tour-list'] || '/';
   }
 
   // convenience getter for easy access to form fields
@@ -69,23 +67,22 @@ export class RegistrationComponent implements OnInit {
       return;
     }
 
-    this.loadingLogin = true;
-    const retValue = this.authenticationService.login(this.f.username.value, this.f.password.value);
+    this.login(this.f.email.value, this.f.password.value);
 
-    console.log(retValue);
-    if (retValue === true) {
-      this.router.navigate([this.returnUrl]);
+  }
 
-    } else {
-      // this.alertService.error();
-      this.loading = false;
-      this.submittedLogin = false;
-    }
+  login(email: string, password: string) {
+    this.authenticationService.login(email, password)
+      .then(data => {
+        console.log(data);
+        this.alertService.success('Login successful', true);
+        this.router.navigate(['./tour-list']);
 
-
-    // this.authenticationService.loginTmp(this.f.username.value, this.f.password.value);
-    // this.router.navigate(['./tour-list']);
-
+      })
+      .catch(e => {
+        this.alertService.error(e);
+        this.loadingLogin = false;
+      });
   }
 
   onSubmit() {
@@ -98,32 +95,26 @@ export class RegistrationComponent implements OnInit {
     const user: AppUser = new AppUser();
     user.firstName = this.r.firstName.value;
     user.lastName = this.r.lastName.value;
-    user.email = this.r.username.value;
+    user.email = this.r.email.value;
     user.password = this.r.password.value;
-
+    user.role = 'user';
     this.loading = true;
 
-    const retValue = this.authenticationService.register(user);
-    if (retValue === true) {
-     // this.authenticationService.login(user.email, user.password);
-      this.router.navigate(['./tour-list']);
-
-    }else {
-      // this.alertService.error();
-      this.loading = false;
-      this.submittedLogin = false;
-    }
-    // this.userService.register(this.registerForm.value)
-    //   .pipe(first())
-    //   .subscribe(
-    //     data => {
-    //       this.alertService.success('Registration successful', true);
-    //       this.router.navigate(['/login']);
-    //     },
-    //     error => {
-    //       this.alertService.error(error);
-    //       this.loading = false;
-    //     });
+    this.authenticationService.register(user).then(data => {
+      this.userService.register(user, data.user.uid)
+        .then(e => {
+          this.alertService.success('Registration successful', true);
+          this.login(user.email, user.password);
+        })
+        .catch(error => {
+          this.alertService.error(error);
+        });
+    })
+      .catch(e => {
+        this.alertService.error(e);
+        this.loading = false;
+        console.log(false);
+      });
   }
 }
 

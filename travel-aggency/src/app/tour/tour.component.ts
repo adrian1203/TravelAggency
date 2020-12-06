@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Tour} from "../model/app-models";
-import {ShoppingCartService} from "../shopping-cart.service";
+import {ShoppingCartService} from '../shopping-cart.service';
 
 @Component({
   selector: 'app-tour',
@@ -12,8 +12,8 @@ export class TourComponent implements OnInit {
   @Output() deleted = new EventEmitter<Tour>();
   @Output() reserve = new EventEmitter<void>();
   @Input() tour: Tour;
+  @Input() isAdminView: boolean;
 
-  opinion: number;
 
   constructor(private shoppingCartService: ShoppingCartService) {
   }
@@ -36,5 +36,10 @@ export class TourComponent implements OnInit {
     this.deleted.emit(this.tour);
     this.reserve.emit();
   }
+
+  // getFirstDate() {
+  //  co startDate : Date = new Date();
+  //   this.tour.tourInstances.forEach(e =>)
+  // }
 
 }

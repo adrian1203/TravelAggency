@@ -29,7 +29,21 @@
     </select>
   </div>
 
-  <br>
+  <div class="form-group col-8">
+    <label class="form-control-label" for="field_semitrailer">Opinion</label>
+    <select class="form-control" [(ngModel)]="opinion">
+      <option [ngValue]="1"> Ocena 1</option>
+      <option [ngValue]="2"> Ocena 2</option>
+      <option [ngValue]="3"> Ocena 3</option>
+      <option [ngValue]="4"> Ocena 4</option>
+      <option [ngValue]="5"> Ocena 5</option>
+    </select>
+    <br>
+    <button type="button" class="btn btn-info pull-right">Add opinion</button>
+
+  </div>
+
+
 
   <div class="col-8">
     <textarea class="form-control" placeholder="write a comment..." rows="3"></textarea>

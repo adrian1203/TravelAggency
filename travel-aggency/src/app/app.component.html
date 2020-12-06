@@ -296,15 +296,16 @@
 </style>
 <div>
   <app-header></app-header>
-  <br><br>
+  <br><br><br><br>
 </div>
 <div>
+  <app-alert></app-alert>
   <router-outlet></router-outlet>
 </div>
-
-<div *ngIf="currentUser!= undefined ">
-  {{currentUser.lastName}}
-</div>
+<!--<app-reservation-popup></app-reservation-popup>-->
+<!--<div *ngIf="currentUser!= undefined ">-->
+<!--  {{currentUser.lastName}}-->
+<!--</div>-->
 <!--<app-tour-list></app-tour-list>-->
 <!--<app-new-tour></app-new-tour>-->
 

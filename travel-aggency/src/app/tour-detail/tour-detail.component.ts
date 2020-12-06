@@ -14,6 +14,8 @@ export class TourDetailComponent implements OnInit {
   toruId: number;
   tour: Tour;
   dates: Array<Date> = new Array<Date>();
+  opinion: number;
+
 
   constructor(
     private toursService: ToursService,

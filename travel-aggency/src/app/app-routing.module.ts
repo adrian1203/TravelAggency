@@ -8,6 +8,8 @@ import {RegistrationComponent} from "./registration/registration.component";
 import {ShoppingCartComponent} from "./shopping-cart/shopping-cart.component";
 import {BookedTourComponent} from "./booked-tour/booked-tour.component";
 import {AuthGuardService} from './auto-guard.service';
+import {AdminPanelComponent} from "./admin-panel/admin-panel.component";
+import {NewTourComponent} from "./new-tour/new-tour.component";
 
 const routes: Routes = [
   {path: 'tour-list', component: TourListComponent},
@@ -15,6 +17,10 @@ const routes: Routes = [
   {path: 'registration', component: RegistrationComponent},
   {path: 'shopping-cart', component: ShoppingCartComponent, canActivate: [AuthGuardService]},
   {path: 'booked-tour', component: BookedTourComponent, canActivate: [AuthGuardService]},
+  {path: 'admin', component: AdminPanelComponent, canActivate: [AuthGuardService]},
+  {path: 'new-tour', component: NewTourComponent, canActivate: [AuthGuardService]},
+
+
 
 
 ];

@@ -5,7 +5,7 @@
     <p>Start date: {{tour.startDate | date:'mediumDate'}}</p>
     <p>End date: {{tour.endDate  | date:'mediumDate'}}</p>
     <p>Price: {{tour.price}} &#8364;</p>
-    <p>My Opinion: {{opinion}}</p>
+    <p>My Opinion: {{tour.opinion}}</p>
   </div>
   <div class="col-sm">
     {{tour.description}}
@@ -22,7 +22,7 @@
     <button *ngIf="tour.reservePlaces > 0" type="button" class="btn btn-danger" (click)="resignationPlace(tour)">
       Resigne
     </button>
-    <button type="button" class="btn btn-danger" (click)="deleteTour()">
+    <button *ngIf="isAdminView==true" type="button" class="btn btn-danger" (click)="deleteTour()">
       Delete
     </button>
 
@@ -32,14 +32,5 @@
       <span class="d-none d-md-inline">Detail</span>
     </button>
 
-
-    <select [(ngModel)]="opinion">
-      <option [ngValue]="1"> Ocena 1</option>
-      <option [ngValue]="2"> Ocena 2</option>
-      <option [ngValue]="3"> Ocena 3</option>
-      <option [ngValue]="4"> Ocena 4</option>
-      <option [ngValue]="5"> Ocena 5</option>
-
-    </select>
   </div>
 </div>

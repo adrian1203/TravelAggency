@@ -12,6 +12,8 @@ export class Tour {
   category: string;
   opinion: number;
   gallery: Array<string>;
+  longInDay: number;
+  tourInstances: Array<TourInstance>;
 
 }
 
@@ -31,6 +33,7 @@ export class AppUser {
   firstName: string;
   lastName: string;
   token: string;
+  role: string;
 }
 
 
@@ -43,3 +46,11 @@ export class CartElement {
   tour: Tour;
   amount: number;
 }
+
+
+export class TourInstance {
+  startDate: Date;
+  endDate: Date;
+  reservedPlace: number;
+}
+
