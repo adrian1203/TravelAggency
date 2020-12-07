@@ -41,7 +41,7 @@ db.once('open', function () {
   var tour = new Tour();
   tour.id = 123453333;
   tour.gallery[0] = 'siemka';
-  tour.gallery[1] = 'siemka';
+  tour.gallery[1] = 'siemkagggggggg';
   tour.tourInstances[0] = {reservedPlace : 123, startDate : new Date()}
 
 
@@ -49,13 +49,24 @@ db.once('open', function () {
     console.log(e);
   })
 
+  app.get('/tours', (req, res) => {
+    console.log('getTours')
+    var Tour = mongoose.model('Tours');
+    Tour.find( function(err, tours) {
+      for (var i = 0; i < tours.length; i++) {
+        console.log('ID:' + tours[i]._id);
+        console.log(tours[i]);
+        res.send(tours);
+      }
+    });
+   // res.sendFile(__dirname + '/index.html');
+  });
+
 
 });
 
 
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
-});
+
 // const { ObjectId } = require('mongodb');
 // const MongoClient = require('mongodb').MongoClient
 
