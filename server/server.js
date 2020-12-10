@@ -1,8 +1,30 @@
 // server.js
+
 console.log('May Node be with you');
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+var cors = require('cors')
+app.options('*', cors())
+var jsonParser = bodyParser.json()
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
+
+
+var allowedOrigins = ['http://localhost:4200'];
+app.use(cors({
+  origin: function(origin, callback){
+    // allow requests with no origin
+    // (like mobile apps or curl requests)
+    if(!origin) return callback(null, true);
+    if(allowedOrigins.indexOf(origin) === -1){
+      var msg = 'The CORS policy for this site does not ' +
+          'allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  }
+}));
+
 
 const mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://admin:adminadmin@cluster0.5e5h3.mongodb.net/test?retryWrites=true&w=majority', {
@@ -13,7 +35,21 @@ const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
 
+
+  //mongo db models
   const Schema = mongoose.Schema;
+
+  const Votes = new Schema({
+    user : Number,
+    vote : Number
+  });
+  mongoose.model('Votes', Votes);
+
+  const Comments = new Schema({
+    user: Number,
+    text: String,
+  });
+  mongoose.model('Comments', Comments);
 
   const Tours = new Schema({
     id: Number,
@@ -28,38 +64,60 @@ db.once('open', function () {
     reservePlaces: Number,
     category: String,
     opinion: Number,
-    gallery: [[String]],
-    tourInstances: [[{
-      startDate: Date,
-      endDate: Date,
-      reservedPlace: Number}]],
-    longInDay: Number,
+    gallery: [String],
+    votes : [Votes],
+    comments : [Comments]
+
   });
+
   mongoose.model('Tours', Tours);
 
-  var Tour = mongoose.model('Tours');
-  var tour = new Tour();
-  tour.id = 123453333;
-  tour.gallery[0] = 'siemka';
-  tour.gallery[1] = 'siemkagggggggg';
-  tour.tourInstances[0] = {reservedPlace : 123, startDate : new Date()}
 
 
-  tour.save(e => {
-    console.log(e);
-  })
 
-  app.get('/tours', (req, res) => {
+
+  //REST API
+
+  app.get('/tours', jsonParser, (req, res) => {
     console.log('getTours')
     var Tour = mongoose.model('Tours');
     Tour.find( function(err, tours) {
-      for (var i = 0; i < tours.length; i++) {
-        console.log('ID:' + tours[i]._id);
-        console.log(tours[i]);
+      console.log(tours);
         res.send(tours);
-      }
     });
-   // res.sendFile(__dirname + '/index.html');
+  });
+
+
+  app.post('/tours', jsonParser, (req, res) => {
+    console.log('getTours')
+    console.log(req.body);
+    var Tour = mongoose.model('Tours');
+    var tour = new Tour();
+    tour.reservePlaces = req.body.reservePlaces;
+    tour.opinion = req.body.opinion;
+    tour.votes = req.body.votes;
+    tour.country = req.body.country;
+    tour.description = req.body.description;
+    tour.startDate = req.body.startDate;
+    tour.endDate = req.body.endDate;
+    tour.price = req.body.price;
+    tour.places = req.body.places;
+    tour.pictureLink = req.body.pictureLink;
+    tour.category = req.body.category;
+    tour.gallery = new Array();
+    for (var i = 0; i < req.body.gallery.length; i++) {
+      console.log(req.body.gallery[i])
+      tour.gallery.push(req.body.gallery[i]);
+    }
+
+    tour.save();
+
+    console.log(tour);
+
+
+
+
+    //console.log(res);
   });
 
 

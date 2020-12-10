@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
-import {AppUser, Tour, TourInstance} from './model/app-models';
+import {AppUser, Tour, Vote} from './model/app-models';
 import {AngularFireDatabase, AngularFireList, AngularFireObject} from '@angular/fire/database';
+import {HttpClient} from "@angular/common/http";
+import {Observable} from "rxjs";
 
 
 @Injectable({
@@ -11,7 +13,8 @@ export class ToursService {
   loremTest = ' is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book';
   public data: AngularFireList<any[]>;
 
-  constructor(private db: AngularFireDatabase) {
+  constructor(private db: AngularFireDatabase,
+              private http: HttpClient) {
   }
 
 
@@ -20,14 +23,6 @@ export class ToursService {
     gallery.push('https://i.ibb.co/KKPMzFr/italy1.jpg');
     gallery.push('https://i.ibb.co/KKPMzFr/italy2.jpg');
     gallery.push('https://i.ibb.co/KKPMzFr/italy2.jpg');
-
-
-    const tourInstances: Array<TourInstance> = new Array<TourInstance>();
-    const tourInstance: TourInstance = new TourInstance();
-    tourInstance.startDate = new Date(2020, 3, 23);
-    tourInstance.startDate = new Date(2020, 3, 30);
-    tourInstance.reservedPlace = 0;
-    tourInstances.push(tourInstance);
 
     const tour: Tour = new Tour();
     tour.id = 1;
@@ -42,7 +37,6 @@ export class ToursService {
     tour.category = 'Domestic'
     tour.opinion = 4.5;
     tour.gallery = gallery;
-    tour.tourInstances = tourInstances;
     const tour1: Tour = new Tour();
     tour1.id = 2;
     tour1.name = 'Italy tour';
@@ -54,9 +48,7 @@ export class ToursService {
     tour1.places = 35;
     tour1.pictureLink = 'https://i.ibb.co/KKPMzFr/italy2.jpg'
     tour1.category = 'Europe Trip'
-    tour1.opinion = 3.9;
     tour1.gallery = gallery;
-    tour1.tourInstances = tourInstances;
     const tour3: Tour = new Tour();
     tour3.id = 3;
     tour3.name = 'Spain tour';
@@ -70,7 +62,6 @@ export class ToursService {
     tour3.category = 'Europe Trip'
     tour3.opinion = 3.4;
     tour3.gallery = gallery;
-    tour3.tourInstances = tourInstances;
     const tours: Array<Tour> = new Array<Tour>();
     tours.push(tour);
     tours.push(tour1);
@@ -115,5 +106,56 @@ export class ToursService {
   deleteProduct(id: number) {
 
   }
+
+  updateTour(tour: Tour) {
+
+  }
+
+  createTour() {
+
+    const votes: Array<Vote> = new Array<Vote>();
+    const vote1 = new Vote();
+    vote1.vote = 3;
+    const vote2 = new Vote();
+    vote2.vote = 3;
+    votes.push(vote1);
+    votes.push(vote2);
+
+    // const commects : Array<Comment> = new Array<Comment>();
+    // const commenct = new Com();
+
+    const gallery: Array<string> = new Array<string>();
+    gallery.push('https://i.ibb.co/KKPMzFr/italy1.jpg');
+    gallery.push('https://i.ibb.co/KKPMzFr/italy2.jpg');
+    gallery.push('https://i.ibb.co/KKPMzFr/italy2.jpg');
+
+    const tour: Tour = new Tour();
+    tour.id = 1;
+    tour.name = 'Poland tour';
+    tour.country = 'Poland';
+    tour.description = this.loremTest;
+    tour.startDate = new Date(2020, 3, 23);
+    tour.endDate = new Date(2020, 3, 30);
+    tour.price = 400;
+    tour.places = 40;
+    tour.pictureLink = 'https://i.ibb.co/KKPMzFr/italy1.jpg'
+    tour.category = 'Domestic'
+    tour.opinion = 4.5;
+    tour.gallery = gallery;
+    tour.votes = votes;
+
+
+    this.http
+      .post<Tour>('http://localhost:5010/tours', tour)
+      .subscribe(e => {
+        return console.log(e);
+
+      });
+  }
+
+  getTours(): Observable<Tour[]> {
+    return this.http.get<Tour[]>('http://localhost:5010/tours');
+  }
+
 
 }

@@ -5,7 +5,7 @@
     <p>Start date: {{tour.startDate | date:'mediumDate'}}</p>
     <p>End date: {{tour.endDate  | date:'mediumDate'}}</p>
     <p>Price: {{tour.price}} &#8364;</p>
-    <p>My Opinion: {{tour.opinion}}</p>
+    <p>My Opinion:  {{tour.opinion !== 0 ? tour.opinion : 'None opinion'}}</p>
   </div>
   <div class="col-sm">
     {{tour.description}}

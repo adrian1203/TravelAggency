@@ -11,6 +11,7 @@ import {ShoppingCartService} from "../shopping-cart.service";
 })
 export class TourListComponent implements OnInit {
   tours: Array<Tour> = new Array<Tour>();
+  tours1: Array<Tour> = new Array<Tour>();
   allReservedPlaces = 0;
   maxPrice: number;
   minPrice = 0;
@@ -75,6 +76,17 @@ export class TourListComponent implements OnInit {
     );
   }
 
+  send() {
+    this.toursService.createTour();
+  }
+
+  get() {
+    this.toursService.getTours().subscribe(e => {
+      console.log(e);
+      this.tours1 = e;
+      console.log(this.tours1);
+    });
+  }
 }
 
 

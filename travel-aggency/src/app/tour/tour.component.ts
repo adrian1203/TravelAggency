@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Tour} from "../model/app-models";
+import {Tour} from '../model/app-models';
 import {ShoppingCartService} from '../shopping-cart.service';
 
 @Component({

@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {Tour} from '../model/app-models';
+import {AppUser, Comment, Tour, Vote} from '../model/app-models';
 import {ToursService} from '../tours.service';
 import {ShoppingCartService} from "../shopping-cart.service";
+import {AuthenticationService} from "../autentication.service";
 
 @Component({
   selector: 'app-tour-detail',
@@ -15,13 +16,18 @@ export class TourDetailComponent implements OnInit {
   tour: Tour;
   dates: Array<Date> = new Array<Date>();
   opinion: number;
-
+  currentUser: AppUser;
+  comment: string;
+  myVote: number;
+  myComment: string;
 
   constructor(
     private toursService: ToursService,
     private route: ActivatedRoute,
-  ) {
+    private  authenticationService: AuthenticationService) {
+    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
   }
+
 
   ngOnInit(): void {
     this.route.data.subscribe()
@@ -42,5 +48,59 @@ export class TourDetailComponent implements OnInit {
     }
 
     console.log(this.dates);
+  }
+
+  checkIfVoted(): boolean {
+    let retValue = false;
+    this.tour.votes.forEach(e => {
+      if (e.user.id === this.currentUser.id) {
+        this.myVote = e.vote;
+        retValue = true;
+      }
+    })
+    return retValue;
+  }
+
+  addOpinion() {
+    const vote = new Vote();
+    vote.user = this.currentUser;
+    vote.vote = this.opinion;
+    this.tour.votes.push(vote);
+    this.toursService.updateTour(this.tour);
+  }
+
+  addComment() {
+    const comment = new Comment();
+    comment.text = this.comment;
+    comment.user = this.currentUser;
+
+    this.tour.comments.push(comment);
+    this.toursService.updateTour(this.tour);
+  }
+
+  checkIfHaveRights(): boolean {
+    if (this.currentUser === null) {
+      return false;
+    }
+
+    // this.currentUser.reservation.forEach(e => {
+    //   if (e.tour.id === this.tour.id) {
+    //     return false;
+    //   }
+    // })
+
+    return true;
+  }
+
+  checkIfWroteComments(): boolean {
+    let retValue = false;
+    console.log(this.tour);
+    this.tour.comments.forEach(e => {
+      if (e.user.id === this.currentUser.id) {
+        this.myComment = e.text;
+        retValue = true;
+      }
+    })
+    return retValue;
   }
 }

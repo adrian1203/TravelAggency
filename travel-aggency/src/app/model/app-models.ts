@@ -10,10 +10,10 @@ export class Tour {
   pictureLink: string;
   reservePlaces = 0;
   category: string;
-  opinion: number;
+  opinion = 5;
   gallery: Array<string>;
-  longInDay: number;
-  tourInstances: Array<TourInstance>;
+  comments: Array<Comment> = new Array<Comment>();
+  votes: Array<Vote> = new Array<Vote>();
 
 }
 
@@ -34,6 +34,7 @@ export class AppUser {
   lastName: string;
   token: string;
   role: string;
+  reservation: Array<Reservation> = new Array<Reservation>();
 }
 
 
@@ -47,10 +48,18 @@ export class CartElement {
   amount: number;
 }
 
+export class Comment {
+  user: AppUser;
+  text: string;
+}
 
-export class TourInstance {
-  startDate: Date;
-  endDate: Date;
-  reservedPlace: number;
+export class Vote {
+  user: AppUser;
+  vote: number;
+}
+
+export class Reservation {
+  tour: Tour;
+  places: number;
 }
 

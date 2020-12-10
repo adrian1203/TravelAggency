@@ -17,38 +17,50 @@
       <hr class="mt-2 mb-2">
       <p>Price: <b> {{tour.price}} &#8364; </b></p>
       <hr class="mt-2 mb-2">
-      <p>Opinion: <b> {{tour.opinion}}   </b> with 5</p>
+      <p>Opinion: <b> {{tour.opinion !== 0 ? tour.opinion +' with 5' : 'None opinion'}}  </b> </p>
     </div>
 
   </div>
   <br>
-  <div class="form-group col-8">
-    <label class="form-control-label" for="field_semitrailer">Start Date</label>
-    <select class="form-control" id="field_semitrailer" name="semitrailer" [(ngModel)]="dates">
-      <option [ngValue]="dates" *ngFor="let date of dates;">{{date  | date:'mediumDate'}}</option>
-    </select>
-  </div>
+<!--  <div class="form-group col-8">-->
+<!--    <label class="form-control-label" for="field_semitrailer">Start Date</label>-->
+<!--    <select class="form-control" id="field_semitrailer" name="semitrailer" [(ngModel)]="dates">-->
+<!--      <option [ngValue]="dates" *ngFor="let date of dates;">{{date  | date:'mediumDate'}}</option>-->
+<!--    </select>-->
+<!--  </div>-->
 
-  <div class="form-group col-8">
-    <label class="form-control-label" for="field_semitrailer">Opinion</label>
+  <div class="form-group col-8" *ngIf="!checkIfVoted() && checkIfHaveRights()">
+    <label class="form-control-label" >Opinion</label>
     <select class="form-control" [(ngModel)]="opinion">
-      <option [ngValue]="1"> Ocena 1</option>
-      <option [ngValue]="2"> Ocena 2</option>
-      <option [ngValue]="3"> Ocena 3</option>
-      <option [ngValue]="4"> Ocena 4</option>
-      <option [ngValue]="5"> Ocena 5</option>
+      <option [ngValue]="1"> Opinion 1</option>
+      <option [ngValue]="2"> Opinion 2</option>
+      <option [ngValue]="3"> Opinion 3</option>
+      <option [ngValue]="4"> Opinion 4</option>
+      <option [ngValue]="5"> Opinion 5</option>
     </select>
     <br>
-    <button type="button" class="btn btn-info pull-right">Add opinion</button>
+    <button type="button" class="btn btn-info pull-right" (click)="addOpinion()">Add opinion</button>
 
+  </div>
+
+  <div class="col-8" *ngIf="checkIfVoted()">
+    <hr class="mt-2 mb-2">
+    My opinion : <b>{{myVote}}</b>
+    <br>
+    <br>
   </div>
 
 
 
-  <div class="col-8">
-    <textarea class="form-control" placeholder="write a comment..." rows="3"></textarea>
+  <div class="col-8" *ngIf="!checkIfWroteComments() && checkIfHaveRights()">
+    <textarea [(ngModel)]="comment" class="form-control" placeholder="write a comment..." rows="3"></textarea>
     <br>
-    <button type="button" class="btn btn-info pull-right">Post</button>
+    <button type="button" class="btn btn-info pull-right" (click)="addComment()">Post</button>
+  </div>
+
+  <div class="col-8" *ngIf="checkIfWroteComments()">
+    <hr class="mt-2 mb-2">
+    My comments : <b>{{myComment}}</b>
   </div>
 
   <div class="col-8">
