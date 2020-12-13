@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, from, Observable} from 'rxjs';
 import {AppUser} from './model/app-models';
-import {ShoppingCartService} from './shopping-cart.service';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {AngularFireDatabase, AngularFireList} from '@angular/fire/database';
 import {UserService} from "./user.service";
@@ -17,7 +16,7 @@ export class AuthenticationService {
   // readonly authState$: Observable<firebase.User | null> = this.fireAuth.authState;
 
 
-  constructor(private http: HttpClient, private shoppingCartService: ShoppingCartService,
+  constructor(private http: HttpClient,
               private fireAuth: AngularFireAuth,
               private db: AngularFireDatabase, private userService: UserService) {
     this.currentUserSubject = new BehaviorSubject<AppUser>(JSON.parse(localStorage.getItem('currentUser')));
@@ -32,7 +31,7 @@ export class AuthenticationService {
     return this.fireAuth.signInWithEmailAndPassword(email, password).then(data => {
       console.log(data.user.uid);
       this.userService.getUser(data.user.uid).subscribe(e => {
-        const user = e as AppUser;
+        const user = e;
         localStorage.setItem('currentUser', JSON.stringify(user));
         this.currentUserSubject.next(user);
         return user;
@@ -40,9 +39,14 @@ export class AuthenticationService {
     });
   }
 
-  logout() {
+  updateUser(user: AppUser) {
+    this.userService.updateUser(user).subscribe(e => {
+      localStorage.setItem('currentUser', JSON.stringify(user));
+      this.currentUserSubject.next(user);
+    });
+  }
 
-    this.shoppingCartService.clearCart();
+  logout() {
     this.fireAuth.signOut();
 
     // remove user from local storage to log user out

@@ -11,9 +11,8 @@ import {ShoppingCartService} from "../shopping-cart.service";
 })
 export class TourListComponent implements OnInit {
   tours: Array<Tour> = new Array<Tour>();
-  tours1: Array<Tour> = new Array<Tour>();
   allReservedPlaces = 0;
-  maxPrice: number;
+  maxPrice = 10000;
   minPrice = 0;
   @Input() isAdminView: boolean;
 
@@ -34,16 +33,20 @@ export class TourListComponent implements OnInit {
   countReservedPlaces() {
     let resevedPlaces = 0;
     this.tours.forEach(
-      e => resevedPlaces += e.reservePlaces)
+      e => resevedPlaces += e.reservePlaces);
     this.allReservedPlaces = resevedPlaces;
   }
 
   deleteTour(tour: Tour) {
+    this.toursService.deleteTours(tour._id);
     this.tours = this.tours.filter(e => e !== tour);
   }
 
   getProducts() {
-    this.tours = this.toursService.getProducts();
+    this.toursService.getTours().subscribe(e => {
+      this.tours = e;
+      console.log(this.tours);
+    });
   }
 
 
@@ -53,41 +56,32 @@ export class TourListComponent implements OnInit {
   }
 
   filter(filer: TourFilter) {
-    this.getProducts();
-    this.tours = this.tours.filter(e => {
-        return filer.category.indexOf(e.category.valueOf()) !== -1;
-      }
-    );
-    this.tours = this.tours.filter(e => {
-        return filer.maxPrice >= e.price;
-      }
-    );
-    this.tours = this.tours.filter(e => {
-        return filer.minPrice <= e.price;
-      }
-    );
-    this.tours = this.tours.filter(e => {
-        return filer.maxOpinion >= e.opinion;
-      }
-    );
-    this.tours = this.tours.filter(e => {
-        return filer.minOpinion <= e.opinion;
-      }
-    );
-  }
-
-  send() {
-    this.toursService.createTour();
-  }
-
-  get() {
     this.toursService.getTours().subscribe(e => {
-      console.log(e);
-      this.tours1 = e;
-      console.log(this.tours1);
+      this.tours = e;
+      this.tours = this.tours.filter(e => {
+          return filer.category.indexOf(e.category.valueOf()) !== -1;
+        }
+      );
+      this.tours = this.tours.filter(e => {
+          return filer.maxPrice >= e.price;
+        }
+      );
+      this.tours = this.tours.filter(e => {
+          return filer.minPrice <= e.price;
+        }
+      );
+      this.tours = this.tours.filter(e => {
+          return filer.maxOpinion >= e.opinion;
+        }
+      );
+      this.tours = this.tours.filter(e => {
+          return filer.minOpinion <= e.opinion;
+        }
+      );
     });
   }
 }
+
 
 
 

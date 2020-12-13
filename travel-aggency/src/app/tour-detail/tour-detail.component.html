@@ -1,4 +1,23 @@
 <div class="container justify-content-center">
+  <div class="m-2" >
+    <form *ngIf="tour.places - tour.reservePlaces > 0 && !isReserved">
+      <h3>Reserve places</h3>
+      <div class="form-group">
+        <label for="placeInput">Places</label>
+        <input type="number" [(ngModel)]="reservedPlaces" name="place" class="form-control" id="placeInput"
+               aria-describedby="emailHelp" placeholder="Enter place">
+        <!--    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+      </div>
+      <button type="submit" class="btn btn-success" (click)="reservePlace(tour)">Submit</button>
+    </form>
+    <div *ngIf="isReserved">
+      Reserved places : {{reservedPlaces}}
+      <button type="button" class="btn btn-danger" (click)="resignationPlace(tour)">
+        Resigne
+      </button>
+    </div>
+
+  </div>
 
 
   <button type="button" id="cancel-save" class="btn btn-secondary" routerLink="/tour-list">
@@ -22,12 +41,26 @@
 
   </div>
   <br>
-<!--  <div class="form-group col-8">-->
-<!--    <label class="form-control-label" for="field_semitrailer">Start Date</label>-->
-<!--    <select class="form-control" id="field_semitrailer" name="semitrailer" [(ngModel)]="dates">-->
-<!--      <option [ngValue]="dates" *ngFor="let date of dates;">{{date  | date:'mediumDate'}}</option>-->
-<!--    </select>-->
-<!--  </div>-->
+
+
+  <div class="col-8">
+    <div class="container">
+
+      <h1 class="font-weight-light text-center text-lg-left mt-4 mb-0">Tour Gallery</h1>
+
+      <hr class="mt-2 mb-5">
+
+      <div class="row text-center text-lg-left">
+
+        <div class="col-lg-3 col-md-4 col-6" *ngFor="let link of tour.gallery">
+          <a class="d-block mb-6 h-300">
+            <img class="img-fluid img-thumbnail" src="{{link}}" alt="">
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
 
   <div class="form-group col-8" *ngIf="!checkIfVoted() && checkIfHaveRights()">
     <label class="form-control-label" >Opinion</label>
@@ -58,29 +91,21 @@
     <button type="button" class="btn btn-info pull-right" (click)="addComment()">Post</button>
   </div>
 
+
+  <h2>Comments</h2>
   <div class="col-8" *ngIf="checkIfWroteComments()">
-    <hr class="mt-2 mb-2">
     My comments : <b>{{myComment}}</b>
+    <hr class="mt-2 mb-2">
   </div>
 
   <div class="col-8">
-    <div class="container">
-
-      <h1 class="font-weight-light text-center text-lg-left mt-4 mb-0">Tour Gallery</h1>
-
-      <hr class="mt-2 mb-5">
-
-      <div class="row text-center text-lg-left">
-
-        <div class="col-lg-3 col-md-4 col-6" *ngFor="let link of tour.gallery">
-          <a class="d-block mb-6 h-300">
-            <img class="img-fluid img-thumbnail" src="{{link}}" alt="">
-          </a>
-        </div>
-
-      </div>
-    </div>
+    <span *ngFor="let comment of tour.comments">
+      <b>{{comment.text}}</b>
+      <hr class="mt-2 mb-2">
+    </span>
   </div>
+
+
 </div>
 
 

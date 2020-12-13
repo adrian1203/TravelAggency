@@ -12,7 +12,7 @@ import {AuthenticationService} from "../autentication.service";
 })
 export class TourDetailComponent implements OnInit {
 
-  toruId: number;
+  toruId: string;
   tour: Tour;
   dates: Array<Date> = new Array<Date>();
   opinion: number;
@@ -21,23 +21,41 @@ export class TourDetailComponent implements OnInit {
   myVote: number;
   myComment: string;
 
+  reservedPlaces: number;
+  isReserved = false;
+
   constructor(
     private toursService: ToursService,
     private route: ActivatedRoute,
-    private  authenticationService: AuthenticationService) {
-    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+    private  authenticationService: AuthenticationService,
+    private shoppingCartService: ShoppingCartService) {
+    this.authenticationService.currentUser.subscribe(x => {
+      this.currentUser = x;
+    });
   }
 
 
   ngOnInit(): void {
-    this.route.data.subscribe()
-    this.toruId = +this.route.snapshot.paramMap.get('id');
+    this.route.data.subscribe();
+    this.toruId = this.route.snapshot.paramMap.get('id');
     this.getTour();
     this.getDates();
+
+
   }
 
   getTour() {
-    this.tour = this.toursService.getProduct(this.toruId);
+    this.toursService.getTour(this.toruId).subscribe(e => {
+      this.tour = e;
+      this.shoppingCartService.getCart().elements.forEach(elem => {
+        console.log(elem);
+        if (elem.tour._id === this.tour._id) {
+          this.isReserved = true;
+          this.reservedPlaces = elem.amount;
+          console.log('tuuutuu');
+        }
+      });
+    });
   }
 
   getDates() {
@@ -53,17 +71,17 @@ export class TourDetailComponent implements OnInit {
   checkIfVoted(): boolean {
     let retValue = false;
     this.tour.votes.forEach(e => {
-      if (e.user.id === this.currentUser.id) {
+      if (e.userId === this.currentUser._id) {
         this.myVote = e.vote;
         retValue = true;
       }
-    })
+    });
     return retValue;
   }
 
   addOpinion() {
     const vote = new Vote();
-    vote.user = this.currentUser;
+    vote.userId = this.currentUser._id;
     vote.vote = this.opinion;
     this.tour.votes.push(vote);
     this.toursService.updateTour(this.tour);
@@ -72,8 +90,8 @@ export class TourDetailComponent implements OnInit {
   addComment() {
     const comment = new Comment();
     comment.text = this.comment;
-    comment.user = this.currentUser;
-
+    comment.userId = this.currentUser._id;
+    console.log(this.currentUser._id);
     this.tour.comments.push(comment);
     this.toursService.updateTour(this.tour);
   }
@@ -96,11 +114,32 @@ export class TourDetailComponent implements OnInit {
     let retValue = false;
     console.log(this.tour);
     this.tour.comments.forEach(e => {
-      if (e.user.id === this.currentUser.id) {
+      if (e.userId === this.currentUser._id) {
         this.myComment = e.text;
         retValue = true;
       }
-    })
+    });
     return retValue;
+  }
+
+  reservePlace(tour: Tour) {
+    this.shoppingCartService.addTour(tour, this.reservedPlaces);
+    tour.reservePlaces = tour.reservePlaces + this.reservedPlaces;
+    this.checkReservation();
+  }
+
+  resignationPlace(tour: Tour) {
+    this.shoppingCartService.removeTour(tour);
+    tour.reservePlaces = tour.reservePlaces - this.reservedPlaces;
+    this.isReserved = false;
+    this.reservedPlaces = 0;
+  }
+
+  checkReservation() {
+    this.shoppingCartService.getCart().elements.forEach(e => {
+      if (e.tour === this.tour) {
+         this.isReserved = true;
+      }
+    });
   }
 }

@@ -10,6 +10,8 @@ import {ToursService} from '../tours.service';
 export class NewTourComponent implements OnInit {
 
   tour: Tour = new Tour();
+  galleryLinks: Array<string> = new Array<string>();
+  link: string;
 
   constructor(private tourService: ToursService) {
   }
@@ -18,8 +20,18 @@ export class NewTourComponent implements OnInit {
   }
 
   save() {
-    this.tourService.addProduct(this.tour);
+    this.tour.gallery = this.galleryLinks;
+    this.tourService.createTour(this.tour);
     this.tour = new Tour();
+  }
+
+  addLink() {
+    this.galleryLinks.push(this.link);
+    this.link = '';
+  }
+
+  deleteLink(link: string) {
+    this.galleryLinks = this.galleryLinks.filter(e => e !== link);
   }
 
 }

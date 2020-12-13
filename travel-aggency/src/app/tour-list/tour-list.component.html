@@ -7,7 +7,7 @@
 
   </div>
   <div class="container ">
-    <app-filter *ngIf="isAdminView!=true" [tours]="tours" (categoryEvent)="filter($event)"></app-filter>
+    <app-filter *ngIf="isAdminView!=true && tours.length > 0" [tours]="tours" (categoryEvent)="filter($event)"></app-filter>
 
   </div>
 
@@ -18,5 +18,3 @@
   </div>
 </div>
 
-<button (click)="send()">TESSSSS</button>
-<button (click)="get()">GETTTTTTTTTT</button>

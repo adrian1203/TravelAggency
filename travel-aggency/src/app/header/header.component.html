@@ -30,6 +30,14 @@
             <span class="d-none d-md-inline">Admin Panel</span>
           </button>
         </li>
+
+        <li *ngIf="user!=null " class="nav-item m-1">
+          <button type="submit"
+                  [routerLink]="['/booked-tour']"
+                  class="btn btn-info">
+            <span class="d-none d-md-inline">Booked tour</span>
+          </button>
+        </li>
       </ul>
     </div>
 

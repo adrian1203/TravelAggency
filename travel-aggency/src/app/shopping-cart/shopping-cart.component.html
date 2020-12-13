@@ -15,7 +15,7 @@
     <span class="d-none d-md-inline">Remove all reservation</span>
   </button>
 
-  <button *ngIf="cartElements.length>0" class="btn btn-success" routerLink="/booked-tour" >
+  <button *ngIf="cartElements.length>0" class="btn btn-success" (click)="confirmReservation()" >
     <span class="d-none d-md-inline">Confirm reservation</span>
   </button>
 </div>

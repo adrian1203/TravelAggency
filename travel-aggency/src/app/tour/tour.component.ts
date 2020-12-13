@@ -21,17 +21,6 @@ export class TourComponent implements OnInit {
   ngOnInit() {
   }
 
-
-  reservePlace(tour: Tour) {
-    this.shoppingCartService.addTour(tour, 1);
-    tour.reservePlaces = tour.reservePlaces + 1;
-    this.reserve.emit();
-  }
-
-  resignationPlace(tour: Tour) {
-    tour.reservePlaces = tour.reservePlaces - 1;
-  }
-
   deleteTour() {
     this.deleted.emit(this.tour);
     this.reserve.emit();

@@ -7,17 +7,24 @@
         <label for="nameInput">Name</label>
         <input [(ngModel)]="tour.name" name="name" type="text" class="form-control" id="nameInput"
                aria-describedby="nameHelp" placeholder="Enter name">
-            <small id="nameHelp" class="form-text text-muted">Put name of tour</small>
+        <small id="nameHelp" class="form-text text-muted">Put name of tour</small>
       </div>
       <div class="form-group">
         <label for="countryInput">Country</label>
-        <input [(ngModel)]="tour.country" name="name" type="text" class="form-control" id="countryInput"
+        <input [(ngModel)]="tour.country" name="country" type="text" class="form-control" id="countryInput"
                aria-describedby="emailHelp" placeholder="Enter country">
         <!--    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
       </div>
       <div class="form-group">
+        <label for="countryInput">Category</label>
+        <input [(ngModel)]="tour.category" name="category" type="text" class="form-control" id="categoryInput"
+               aria-describedby="emailHelp" placeholder="Enter category">
+        <!--    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+      </div>
+      <div class="form-group">
         <label for="nameInput">Start date</label>
-        <input [(ngModel)]="tour.startDate" name="startDate" type="datetime-local" class="form-control" id="startDateInput"
+        <input [(ngModel)]="tour.startDate" name="startDate" type="datetime-local" class="form-control"
+               id="startDateInput"
                aria-describedby="emailHelp" placeholder="Enter email">
         <!--    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
       </div>
@@ -30,21 +37,51 @@
       </div>
       <div class="form-group">
         <label for="priceInput">Price</label>
-        <input type="number" [(ngModel)]="tour.price" name="price"  class="form-control" id="priceInput"
+        <input type="number" [(ngModel)]="tour.price" name="price" class="form-control" id="priceInput"
                aria-describedby="emailHelp" placeholder="Enter price">
         <!--    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
       </div>
       <div class="form-group">
         <label for="placeInput">Places</label>
-        <input type="number" [(ngModel)]="tour.places" name="place"  class="form-control" id="placeInput"
+        <input type="number" [(ngModel)]="tour.places" name="place" class="form-control" id="placeInput"
                aria-describedby="emailHelp" placeholder="Enter place">
         <!--    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
       </div>
       <div class="form-group">
         <label for="descriptionInput">Description</label>
-        <textarea type="textarea" [(ngModel)]="tour.description" name="place"  class="form-control" id="descriptionInput"
+        <textarea type="textarea" [(ngModel)]="tour.description" name="place" class="form-control" id="descriptionInput"
                   aria-describedby="emailHelp" placeholder="Enter description"></textarea>
         <!--    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+      </div>
+      <div class="form-group">
+        <label for="nameInput">Picture Link</label>
+        <input [(ngModel)]="tour.pictureLink" name="name" type="text" class="form-control" id="pictureInput"
+               aria-describedby="nameHelp" placeholder="Enter name">
+        <!--        <small id="pictureHelp" class="form-text text-muted">Put name of tour</small>-->
+      </div>
+      <div class="border-top  border-dark m-2">
+        <form>
+          <h4>Add Gellary Links</h4>
+          <div class="form-group">
+            <label for="nameInput">Picture Link</label>
+            <input [(ngModel)]="link" name="name" type="text" class="form-control" id="galeryInput"
+                   aria-describedby="galeryHelp" placeholder="Enter name">
+            <!--        <small id="pictureHelp" class="form-text text-muted">Put name of tour</small>-->
+          </div>
+          <button class="btn btn-primary" (click)="addLink()">Add Link</button>
+
+          <h4 *ngIf="galleryLinks.length > 0">Proposals</h4>
+          <div *ngFor="let link of galleryLinks " class="container m-2">
+            <div class="row border-bottom border-secondary">
+              <div class="col-8">
+                <span>Link : <b>{{link}}</b></span> <br>
+              </div>
+              <div class="col-4">
+                <button class="btn btn-danger" (click)="deleteLink(link)">Delete</button>
+              </div>
+            </div>
+          </div>
+        </form>
       </div>
       <button type="submit" class="btn btn-primary" (click)="save()">Submit</button>
     </form>

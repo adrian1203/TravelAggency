@@ -1,5 +1,5 @@
 export class Tour {
-  id: number;
+  _id: string;
   name: string;
   country: string;
   startDate: Date;
@@ -28,6 +28,7 @@ export class TourFilter {
 
 export class AppUser {
   id: number;
+  _id: string;
   email: string;
   password: string;
   firstName: string;
@@ -49,17 +50,18 @@ export class CartElement {
 }
 
 export class Comment {
-  user: AppUser;
+  userId: string;
   text: string;
 }
 
 export class Vote {
-  user: AppUser;
+  userId: string;
   vote: number;
 }
 
 export class Reservation {
   tour: Tour;
+  tourId: string;
   places: number;
 }
 

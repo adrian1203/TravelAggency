@@ -102,12 +102,9 @@ export class RegistrationComponent implements OnInit {
 
     this.authenticationService.register(user).then(data => {
       this.userService.register(user, data.user.uid)
-        .then(e => {
+        .subscribe(e => {
           this.alertService.success('Registration successful', true);
           this.login(user.email, user.password);
-        })
-        .catch(error => {
-          this.alertService.error(error);
         });
     })
       .catch(e => {
