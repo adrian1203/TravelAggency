@@ -1,25 +1,6 @@
-<p>booked-tour works!</p>
 
 <div class="container justify-content-center">
-
-
-<!--<<div>-->
-<!--    <div class="col-8">-->
-<!--      <hr class="mt-2 mb-2">-->
-<!--      <p>Total price:: <b>{{totalPrice}} &#8364; </b></p>-->
-<!--      <hr class="mt-2 mb-2">-->
-<!--      <p>Total price:: <b>{{totalReservation}} </b></p>-->
-<!--      <hr class="mt-2 mb-2">-->
-<!--    </div>-->
-<!--  </div>-->
-<!--  <button  class="btn btn-success" routerLink="/booked-tour" >-->
-<!--    <span class="d-none d-md-inline">Confirm reservation</span>-->
-<!--  </button>-->
-
-  <div *ngFor="let reservation of currentUser.reservation">
-    {{reservation.tourId}}
-  </div>
-
+  <h2>My booked reservation</h2>
   <div class="container border m-1"
        *ngFor="let reservation of currentUser.reservation">
     <app-tour [tour]="reservation.tour" [myReservedPlace]="reservation.places" ></app-tour>

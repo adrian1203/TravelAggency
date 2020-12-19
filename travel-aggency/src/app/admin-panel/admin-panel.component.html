@@ -1,22 +1,27 @@
-<p>admin-panel works!</p>
-
-
-<div>
-  <button type="submit" [routerLink]="['/new-tour/undefined']"
-          class="btn btn-success">
-    <span class="d-none d-md-inline">Create new tour</span>
-  </button>
-</div>
-<br>
-<div>
-  <button
-          class="btn btn-success" (click)="startSale()">
-    <span class="d-none d-md-inline">Start Sale</span>
-  </button>
-  <button
-    class="btn btn-danger" (click)="endSale()">
-    <span class="d-none d-md-inline">Stop Sale</span>
-  </button>
+<div class="container">
+  <div class="row p-1">
+    <div class="col">
+    <button type="submit" [routerLink]="['/new-tour/undefined']"
+            class="btn btn-success">
+      <span class="d-none d-md-inline">Create new tour</span>
+    </button>
+    </div>
+  </div>
+  <div class="row p-1">
+    <div class="col">
+      <h3>Manage sales</h3>
+      <button
+        class="btn btn-success" (click)="startSale()">
+        <span class="d-none d-md-inline">Start Sale</span>
+      </button>
+      <button
+        class="btn btn-danger" (click)="endSale()">
+        <span class="d-none d-md-inline">Stop Sale</span>
+      </button>
+    </div>
+  </div>
+  <h2>Tours</h2>
 </div>
 <app-tour-list [isAdminView]="true"></app-tour-list>
+
 

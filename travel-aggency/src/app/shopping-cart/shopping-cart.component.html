@@ -1,21 +1,18 @@
-
-
 <div class="container justify-content-center">
 
-<h2>My reservation</h2>
-  <div *ngFor="let elem of cartElements">
-    Tour name: <p>{{elem.tour.name}}</p>
-    Number of places: <p>{{elem.amount}}</p>
-    <button class="btn btn-danger" (click)="removeReservation(elem)">
-      <span class="d-none d-md-inline">Remove reservation</span>
-    </button>
-  </div>
-  <br>
-  <button *ngIf="cartElements.length>0" class="btn btn-danger" (click)="clearCart()">
+  <h2>My reservation</h2>
+  <button *ngIf="cartElements.length>0" class="btn btn-danger m-1" (click)="clearCart()">
     <span class="d-none d-md-inline">Remove all reservation</span>
   </button>
 
-  <button *ngIf="cartElements.length>0" class="btn btn-success" (click)="confirmReservation()" >
-    <span class="d-none d-md-inline">Confirm reservation</span>
+  <button *ngIf="cartElements.length>0" class="btn btn-success m-1" (click)="confirmReservation()">
+    <span class="d-none d-md-inline">Confirm all reservation</span>
   </button>
+
+  <h3></h3>
+
+  <div class="container border m-1"
+       *ngFor="let elem of cartElements">
+    <app-tour [tour]="elem.tour" [myReservedPlace]="elem.amount" [cartElement]="elem"></app-tour>
+  </div>
 </div>

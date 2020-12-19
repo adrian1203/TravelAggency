@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Cart, Tour, TourFilter} from '../model/app-models';
-import {ToursService} from "../tours.service";
-import {ShoppingCartService} from "../shopping-cart.service";
+import {ToursService} from "../_service/tours.service";
+import {ShoppingCartService} from "../_service/shopping-cart.service";
 
 
 @Component({

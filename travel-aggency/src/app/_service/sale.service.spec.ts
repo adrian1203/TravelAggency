@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AutoGuardService } from './auto-guard.service';
+import { SaleService } from './sale.service';
 
-describe('AutoGuardService', () => {
-  let service: AutoGuardService;
+describe('SaleService', () => {
+  let service: SaleService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(AutoGuardService);
+    service = TestBed.inject(SaleService);
   });
 
   it('should be created', () => {

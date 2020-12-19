@@ -11,7 +11,7 @@
   <div class="col-sm">
     {{tour.description}}
   </div>
-  <div class="col-sm">
+  <div class="col-sm mh-25 mw-25 m-1">
     <img [routerLink]="['/tour-detail', tour._id]" src="{{tour.pictureLink}}" class="rounded-circle mt-1" alt="Cinque Terre">
   </div>
   <div class="col-sm">
@@ -19,21 +19,20 @@
     <p> Reserved places : <b>{{tour.reservePlaces}}</b></p>
     <p *ngIf="myReservedPlace!=undefined"> Reserved places by me : <b>{{myReservedPlace}}</b></p>
     <p class="text-danger" *ngIf="tour.places - tour.reservePlaces <= 0"> No spots left</p>
-    <button *ngIf="isAdminView==true" type="button" class="btn btn-danger" (click)="deleteTour()">
+    <button *ngIf="isAdminView==true" type="button" class="btn btn-danger m-1" (click)="deleteTour()">
       Delete
     </button>
-
-    <button *ngIf="isAdminView==true" type="button" class="btn btn-dark"
+    <button *ngIf="cartElement!==undefined" type="button" class="btn btn-danger m-1" (click)="removeReservation()">
+      Remove reservation
+    </button>
+    <button *ngIf="isAdminView==true" type="button" class="btn btn-dark m-1"
             [routerLink]="['/new-tour', tour._id]">
       <span class="d-none d-md-inline">Edit</span>
-
     </button>
-
     <button type="submit"
             [routerLink]="['/tour-detail', tour._id]"
             class="btn btn-info">
       <span class="d-none d-md-inline">Detail</span>
     </button>
-
   </div>
 </div>

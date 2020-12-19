@@ -3,9 +3,9 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {AppUser} from "../model/app-models";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {first} from "rxjs/operators";
-import {AuthenticationService} from "../autentication.service";
-import {AlertService} from "../alert.service";
-import {UserService} from "../user.service";
+import {AuthenticationService} from "../_service/autentication.service";
+import {AlertService} from "../_service/alert.service";
+import {UserService} from "../_service/user.service";
 
 @Component({
   selector: 'app-registration',

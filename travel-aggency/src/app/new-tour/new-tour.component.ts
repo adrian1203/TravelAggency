@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Tour} from '../model/app-models';
-import {ToursService} from '../tours.service';
+import {ToursService} from '../_service/tours.service';
 import {ActivatedRoute, Router} from "@angular/router";
+
 
 @Component({
   selector: 'app-new-tour',
@@ -26,11 +27,9 @@ export class NewTourComponent implements OnInit {
     this.toruId = this.route.snapshot.paramMap.get('id');
     if (this.toruId !== 'undefined') {
       this.tourService.getTour(this.toruId).subscribe(e => {
-        console.log(e);
         this.isEditing = true;
         this.tour = e;
         this.galleryLinks = this.tour.gallery;
-        console.log(this.tour);
       });
     }
   }

@@ -30,6 +30,14 @@ import { ReservationPopupComponent } from './reservation-popup/reservation-popup
 import { SaleComponent } from './sale/sale.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatSidenavModule} from "@angular/material/sidenav";
+import {MatButtonModule} from "@angular/material/button";
+import {MatIconModule} from "@angular/material/icon";
+import {MatListModule} from "@angular/material/list";
+
 const config: SocketIoConfig = { url: 'http://localhost:5010', options: {} };
 
 
@@ -53,6 +61,13 @@ const config: SocketIoConfig = { url: 'http://localhost:5010', options: {} };
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule,
+    MatIconModule,
+    MatButtonModule,
+    FlexLayoutModule,
     AppRoutingModule,
     FormsModule,
     NgbDatepickerModule,
@@ -73,6 +88,7 @@ const config: SocketIoConfig = { url: 'http://localhost:5010', options: {} };
 
   ],
   bootstrap: [AppComponent]
+
 })
 export class AppModule {
 }

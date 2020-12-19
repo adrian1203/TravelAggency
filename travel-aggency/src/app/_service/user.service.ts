@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {AppUser, Tour} from './model/app-models';
+import {AppUser, Tour} from '../model/app-models';
 import {AngularFireDatabase, AngularFireList} from "@angular/fire/database";
 import {Observable} from "rxjs";
 

@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {AppUser, Comment, Tour, Vote} from '../model/app-models';
-import {ToursService} from '../tours.service';
-import {ShoppingCartService} from "../shopping-cart.service";
-import {AuthenticationService} from "../autentication.service";
+import {ToursService} from '../_service/tours.service';
+import {ShoppingCartService} from "../_service/shopping-cart.service";
+import {AuthenticationService} from "../_service/autentication.service";
 
 @Component({
   selector: 'app-tour-detail',
@@ -52,7 +52,6 @@ export class TourDetailComponent implements OnInit {
         if (elem.tour._id === this.tour._id) {
           this.isReserved = true;
           this.reservedPlaces = elem.amount;
-          console.log('tuuutuu');
         }
       });
     });
@@ -122,15 +121,16 @@ export class TourDetailComponent implements OnInit {
     return retValue;
   }
 
-  reservePlace(tour: Tour) {
-    this.shoppingCartService.addTour(tour, this.reservedPlaces);
-    tour.reservePlaces = tour.reservePlaces + this.reservedPlaces;
+  reservePlace() {
+    console.log(this.reservedPlaces);
+    this.shoppingCartService.addTour(this.tour, this.reservedPlaces);
+    this.tour.reservePlaces = this.tour.reservePlaces + this.reservedPlaces;
     this.checkReservation();
   }
 
-  resignationPlace(tour: Tour) {
-    this.shoppingCartService.removeTour(tour);
-    tour.reservePlaces = tour.reservePlaces - this.reservedPlaces;
+  resignationPlace() {
+    this.shoppingCartService.removeTour(this.tour);
+    this.tour.reservePlaces = this.tour.reservePlaces + this.reservedPlaces;
     this.isReserved = false;
     this.reservedPlaces = 0;
   }
@@ -141,5 +141,9 @@ export class TourDetailComponent implements OnInit {
         this.isReserved = true;
       }
     });
+  }
+
+  numbersArray(n: number): number[] {
+    return [...Array(n).keys()];
   }
 }

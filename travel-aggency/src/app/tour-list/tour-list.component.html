@@ -1,23 +1,22 @@
+<div class="container  ">
+  <!--  <div class="containe justify-content-center ">-->
+  <!--    <span [ngClass]="allReservedPlaces > 10 ? 'bg-success' : 'bg-danger'">All reserved places: {{allReservedPlaces}}</span>-->
 
-<div class="row justify-content-center">
-
-
-  <div class="containe justify-content-center ">
-    <span [ngClass]="allReservedPlaces > 10 ? 'bg-success' : 'bg-danger'">All reserved places: {{allReservedPlaces}}</span>
-
-  </div>
-  <div class="container ">
-    <app-filter *ngIf="isAdminView!=true && tours.length > 0 && resetFilterRequire==false"  [tours]="tours" (categoryEvent)="filter($event)"></app-filter>
-    <div *ngIf="resetFilterRequire==true">
-      <span>Sorry we haven't any tours with this criteria</span><br>
-      <button  type="submit" class="btn btn-primary" (click)="resetFilter()">Reset Criteria</button>
-    </div>
+  <!--  </div>-->
+  <div class="container justify-content-center  ">
+    <app-filter *ngIf="isAdminView!=true && tours.length > 0 && resetFilterRequire==false" [tours]="tours"
+                (categoryEvent)="filter($event)"></app-filter>
+      <div *ngIf="resetFilterRequire==true" class="col">
+        <h2>We haven't any tours with this criteria</h2><br>
+        <button type="submit" class="btn btn-primary" (click)="resetFilter()">Reset Criteria</button>
+      </div>
   </div>
 
-  <div class="container border m-1"
+  <div class="container border m-1" style="border-color: darkblue"
        [ngClass]=" tour.price == maxPrice ? 'border-success' : tour.price == minPrice ? 'border-danger' : 'border-dark'"
        *ngFor="let tour of tours">
-    <app-tour (deleted)="deleteTour(tour)" (reserve)="countReservedPlaces()" [tour]="tour" [isAdminView]="isAdminView"></app-tour>
+    <app-tour (deleted)="deleteTour(tour)" (reserve)="countReservedPlaces()" [tour]="tour"
+              [isAdminView]="isAdminView"></app-tour>
   </div>
 </div>
 

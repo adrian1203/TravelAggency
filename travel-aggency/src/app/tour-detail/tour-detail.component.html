@@ -1,34 +1,32 @@
 <div class="container justify-content-center">
-  <div class="m-2" >
+  <h2>Tour detail information</h2>
+  <div class="m-2 row" >
     <form *ngIf="tour.places - tour.reservePlaces > 0 && !isReserved">
       <h3>Reserve places</h3>
-      <div class="form-group">
-        <label for="placeInput">Places</label>
-        <input type="number" [(ngModel)]="reservedPlaces" name="place" class="form-control" id="placeInput"
-               aria-describedby="emailHelp" placeholder="Enter place">
-        <!--    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+      <div class=" col form-group">
+        <label class="form-control-label" >Number of places</label>
+        <select class="form-control" [(ngModel)]="reservedPlaces" name="inpuList">
+          <option [ngValue]="number" *ngFor="let number of numbersArray(tour.places - tour.reservePlaces)"> {{number}} places</option>
+        </select>
       </div>
-      <button type="submit" class="btn btn-success" (click)="reservePlace(tour)">Submit</button>
+      <button type="submit" class="btn btn-success" (click)="reservePlace()">Submit</button>
     </form>
     <div *ngIf="isReserved">
       Reserved places : {{reservedPlaces}}
-      <button type="button" class="btn btn-danger" (click)="resignationPlace(tour)">
+      <button type="button" class="btn btn-danger" (click)="resignationPlace()">
         Resigne
       </button>
     </div>
 
   </div>
-
-
-  <button type="button" id="cancel-save" class="btn btn-secondary" routerLink="/tour-list">
-    <span>Back</span>
-  </button>
   <div>
     <div class="col-8">
       <hr class="mt-2 mb-2">
       <p>Name: <b> {{tour.name.toUpperCase()}} </b></p>
       <hr class="mt-2 mb-2">
       <p>Country: <b>{{tour.country.toUpperCase()}} </b></p>
+      <hr class="mt-2 mb-2">
+      <p>Category: <b>{{tour.category.toUpperCase()}} </b></p>
       <hr class="mt-2 mb-2">
       <p>Start date: <b> {{tour.startDate | date:'mediumDate'}} </b></p>
       <hr class="mt-2 mb-2">

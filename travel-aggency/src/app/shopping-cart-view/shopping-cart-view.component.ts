@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Cart} from "../model/app-models";
-import {ToursService} from "../tours.service";
-import {ShoppingCartService} from "../shopping-cart.service";
-import {AuthenticationService} from "../autentication.service";
+import {ToursService} from "../_service/tours.service";
+import {ShoppingCartService} from "../_service/shopping-cart.service";
+import {AuthenticationService} from "../_service/autentication.service";
 
 @Component({
   selector: 'app-shopping-cart-view',
