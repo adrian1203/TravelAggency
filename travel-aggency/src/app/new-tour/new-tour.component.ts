@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Tour} from '../model/app-models';
 import {ToursService} from '../tours.service';
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-new-tour',
@@ -9,14 +10,27 @@ import {ToursService} from '../tours.service';
 })
 export class NewTourComponent implements OnInit {
 
+  toruId: string;
   tour: Tour = new Tour();
   galleryLinks: Array<string> = new Array<string>();
   link: string;
+  isEditing = false;
 
-  constructor(private tourService: ToursService) {
+  constructor(private tourService: ToursService,
+              private route: ActivatedRoute, private router: Router
+  ) {
   }
 
   ngOnInit() {
+    this.route.data.subscribe();
+    this.toruId = this.route.snapshot.paramMap.get('id');
+    if (this.toruId !== 'undefined') {
+      this.tourService.getTour(this.toruId).subscribe(e => {
+        this.isEditing = true;
+        this.tour = e;
+        this.galleryLinks = this.tour.gallery;
+      });
+    }
   }
 
   save() {
@@ -25,12 +39,22 @@ export class NewTourComponent implements OnInit {
     this.tour = new Tour();
   }
 
+  update() {
+    this.tour.gallery = this.galleryLinks;
+    this.tourService.updateTour(this.tour);
+    this.router.navigate(['./tour-detail/' + this.toruId]);
+
+  }
+
   addLink() {
     this.galleryLinks.push(this.link);
     this.link = '';
   }
 
-  deleteLink(link: string) {
+  deleteLink(link
+               :
+               string
+  ) {
     this.galleryLinks = this.galleryLinks.filter(e => e !== link);
   }
 

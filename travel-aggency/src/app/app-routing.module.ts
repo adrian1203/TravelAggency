@@ -18,7 +18,7 @@ const routes: Routes = [
   {path: 'shopping-cart', component: ShoppingCartComponent, canActivate: [AuthGuardService]},
   {path: 'booked-tour', component: BookedTourComponent, canActivate: [AuthGuardService]},
   {path: 'admin', component: AdminPanelComponent, canActivate: [AuthGuardService]},
-  {path: 'new-tour', component: NewTourComponent, canActivate: [AuthGuardService]},
+  {path: 'new-tour/:id', component: NewTourComponent, canActivate: [AuthGuardService]},
 
 
 

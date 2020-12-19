@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Tour} from '../model/app-models';
 import {ShoppingCartService} from '../shopping-cart.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-tour',
@@ -15,7 +16,7 @@ export class TourComponent implements OnInit {
   @Input() isAdminView: boolean;
 
 
-  constructor(private shoppingCartService: ShoppingCartService) {
+  constructor(private shoppingCartService: ShoppingCartService, private router : Router) {
   }
 
   ngOnInit() {

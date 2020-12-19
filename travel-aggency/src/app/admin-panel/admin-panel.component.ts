@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {SaleService} from "../sale.service";
 
 @Component({
   selector: 'app-admin-panel',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminPanelComponent implements OnInit {
 
-  constructor() { }
+  message = "";
+
+  constructor(private saleService: SaleService) {
+  }
 
   ngOnInit(): void {
+  }
+
+  startSale() {
+    console.log(this.message);
+    this.saleService.startSaleRequest(this.message);
+  }
+
+  endSale() {
+    this.saleService.endSaleRequest();
   }
 
 }

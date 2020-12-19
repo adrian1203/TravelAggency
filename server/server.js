@@ -1,7 +1,6 @@
 // server.js
 
 
-console.log('May Node be with you');
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
@@ -9,6 +8,9 @@ var cors = require('cors')
 app.options('*', cors())
 var jsonParser = bodyParser.json()
 var urlencodedParser = bodyParser.urlencoded({extended: false})
+
+
+
 
 
 var allowedOrigins = ['http://localhost:4200'];
@@ -26,11 +28,26 @@ app.use(cors({
     }
 }));
 
+const http = require('http').Server(app);
+const io = require("socket.io")(http, {
+    cors: {
+        origin: "http://localhost:4200",
+        methods: ["GET", "POST"]
+    }
+});
+//  app.listen(5010, function () {
+//     console.log("server is running on port 5010");
+// });
+http.listen('5010')
+
+
 
 const mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://admin:adminadmin@cluster0.5e5h3.mongodb.net/test?retryWrites=true&w=majority', {
     useNewUrlParser: true
 });
+
+
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -273,11 +290,26 @@ db.once('open', function () {
         });
     });
 
+    io.on('connection' , function(client) {
+        console.log('connnnnnnnnn');
+        app.get('/sale', (req, res) => {
+            client.emit('startSale', 'start');
+            io.emit('startSale', 'start');
+            console.log(req.body);
+            res.send(req.body)
+        });
+
+        app.get('/sale-stop', (req, res) => {
+            console.log('stopppp');
+            client.emit('endSale', req.body);
+            io.emit('endSale', req.body);
+            res.send(req.body)
+        });
+    });
+
 });
 
-app.listen(5010, function () {
-    console.log("server is running on port 5010");
-});
+
 
 
 

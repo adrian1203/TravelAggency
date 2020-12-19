@@ -40,8 +40,6 @@ export class ToursService {
   }
 
   updateTour(tour: Tour) {
-    console.log('uDUPA');
-    console.log(tour);
     if (tour.votes.length > 0) {
       let sum = 0;
       tour.votes.forEach(e => sum += e.vote);

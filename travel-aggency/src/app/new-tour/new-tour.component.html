@@ -83,7 +83,8 @@
           </div>
         </form>
       </div>
-      <button type="submit" class="btn btn-primary" (click)="save()">Submit</button>
+      <button *ngIf="!isEditing" type="submit" class="btn btn-primary" (click)="save()">Save</button>
+      <button *ngIf="isEditing" type="submit" class="btn btn-primary" (click)="update()">Edit</button>
     </form>
   </div>
 </div>

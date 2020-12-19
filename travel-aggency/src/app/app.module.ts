@@ -27,6 +27,10 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import {environment} from '../environments/environment';
 import { AlertComponent } from './alert/alert.component';
 import { ReservationPopupComponent } from './reservation-popup/reservation-popup.component';
+import { SaleComponent } from './sale/sale.component';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+
+const config: SocketIoConfig = { url: 'http://localhost:5010', options: {} };
 
 
 @NgModule({
@@ -45,6 +49,7 @@ import { ReservationPopupComponent } from './reservation-popup/reservation-popup
     AdminPanelComponent,
     AlertComponent,
     ReservationPopupComponent,
+    SaleComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,7 +63,9 @@ import { ReservationPopupComponent } from './reservation-popup/reservation-popup
     HttpClientModule,
     AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    SocketIoModule.forRoot(config)
+
   ],
   providers: [
     // { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

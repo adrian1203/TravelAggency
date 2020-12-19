@@ -2,9 +2,20 @@
 
 
 <div>
-  <button type="submit" [routerLink]="['/new-tour']"
+  <button type="submit" [routerLink]="['/new-tour/undefined']"
           class="btn btn-success">
     <span class="d-none d-md-inline">Create new tour</span>
+  </button>
+</div>
+<br>
+<div>
+  <button
+          class="btn btn-success" (click)="startSale()">
+    <span class="d-none d-md-inline">Start Sale</span>
+  </button>
+  <button
+    class="btn btn-danger" (click)="endSale()">
+    <span class="d-none d-md-inline">Stop Sale</span>
   </button>
 </div>
 <app-tour-list [isAdminView]="true"></app-tour-list>
