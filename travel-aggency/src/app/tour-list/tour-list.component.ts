@@ -17,6 +17,7 @@ export class TourListComponent implements OnInit {
   @Input() isAdminView: boolean;
 
   cart: Cart;
+  resetFilterRequire = false;
 
   constructor(private toursService: ToursService,
               private shoppingCartService: ShoppingCartService) {
@@ -27,7 +28,6 @@ export class TourListComponent implements OnInit {
 
   ngOnInit() {
     this.getProducts();
-    this.calculatePrice();
   }
 
   countReservedPlaces() {
@@ -45,7 +45,7 @@ export class TourListComponent implements OnInit {
   getProducts() {
     this.toursService.getTours().subscribe(e => {
       this.tours = e;
-      console.log(this.tours);
+      this.calculatePrice();
     });
   }
 
@@ -78,7 +78,16 @@ export class TourListComponent implements OnInit {
           return filer.minOpinion <= e.opinion;
         }
       );
+
+      if (e.length > 0 && this.tours.length === 0) {
+        this.resetFilterRequire = true;
+      }
     });
+  }
+
+  resetFilter() {
+    this.filter(new TourFilter());
+    this.resetFilterRequire = false;
   }
 }
 

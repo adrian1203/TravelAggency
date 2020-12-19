@@ -72,6 +72,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   login(email: string, password: string) {
+    console.log('zalogowało');
     this.authenticationService.login(email, password)
       .then(data => {
         console.log(data);

@@ -3,7 +3,6 @@ import {HttpClient} from '@angular/common/http';
 import {AppUser, Tour} from './model/app-models';
 import {AngularFireDatabase, AngularFireList} from "@angular/fire/database";
 import {Observable} from "rxjs";
-import {AuthenticationService} from "./autentication.service";
 
 
 @Injectable({providedIn: 'root'})
@@ -24,7 +23,6 @@ export class UserService {
     return this.http
       .post<AppUser>('http://localhost:5010/users', user);
 
-    // return this.db.object('ztwprojekt/users/' + uid).set(user);
   }
 
   delete(id: number) {

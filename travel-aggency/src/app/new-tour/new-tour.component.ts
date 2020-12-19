@@ -26,9 +26,11 @@ export class NewTourComponent implements OnInit {
     this.toruId = this.route.snapshot.paramMap.get('id');
     if (this.toruId !== 'undefined') {
       this.tourService.getTour(this.toruId).subscribe(e => {
+        console.log(e);
         this.isEditing = true;
         this.tour = e;
         this.galleryLinks = this.tour.gallery;
+        console.log(this.tour);
       });
     }
   }
@@ -36,7 +38,7 @@ export class NewTourComponent implements OnInit {
   save() {
     this.tour.gallery = this.galleryLinks;
     this.tourService.createTour(this.tour);
-    this.tour = new Tour();
+    this.router.navigate(['./admin']);
   }
 
   update() {
@@ -51,10 +53,7 @@ export class NewTourComponent implements OnInit {
     this.link = '';
   }
 
-  deleteLink(link
-               :
-               string
-  ) {
+  deleteLink(link: string) {
     this.galleryLinks = this.galleryLinks.filter(e => e !== link);
   }
 

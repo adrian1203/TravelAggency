@@ -97,17 +97,17 @@ export class TourDetailComponent implements OnInit {
   }
 
   checkIfHaveRights(): boolean {
-    if (this.currentUser === null) {
-      return false;
+    console.log(this.currentUser);
+    console.log(this.toruId);
+    let retvalue = false;
+    if (this.currentUser !== null) {
+      this.currentUser.reservation.forEach(e => {
+        if (e.tourId === this.toruId) {
+          retvalue = true;
+        }
+      });
     }
-
-    // this.currentUser.reservation.forEach(e => {
-    //   if (e.tour.id === this.tour.id) {
-    //     return false;
-    //   }
-    // })
-
-    return true;
+    return retvalue;
   }
 
   checkIfWroteComments(): boolean {
@@ -138,7 +138,7 @@ export class TourDetailComponent implements OnInit {
   checkReservation() {
     this.shoppingCartService.getCart().elements.forEach(e => {
       if (e.tour === this.tour) {
-         this.isReserved = true;
+        this.isReserved = true;
       }
     });
   }

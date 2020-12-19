@@ -5,6 +5,7 @@ import {AppUser} from './model/app-models';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {AngularFireDatabase, AngularFireList} from '@angular/fire/database';
 import {UserService} from "./user.service";
+import {Router} from "@angular/router";
 
 
 @Injectable({providedIn: 'root'})
@@ -16,7 +17,7 @@ export class AuthenticationService {
   // readonly authState$: Observable<firebase.User | null> = this.fireAuth.authState;
 
 
-  constructor(private http: HttpClient,
+  constructor(private router: Router, private http: HttpClient,
               private fireAuth: AngularFireAuth,
               private db: AngularFireDatabase, private userService: UserService) {
     this.currentUserSubject = new BehaviorSubject<AppUser>(JSON.parse(localStorage.getItem('currentUser')));
@@ -52,6 +53,7 @@ export class AuthenticationService {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
+    this.router.navigate(['./tour-list']);
 
   }
 

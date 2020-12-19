@@ -1,11 +1,12 @@
 <div class="row" [ngClass]="tour.places - tour.reservePlaces > 3 ? 'bg-light' : 'bg-warning'">
   <div class="col-sm">
-    <p>Name: {{tour.name.toUpperCase()}}</p>
-    <p>Country: {{tour.country.toUpperCase()}}</p>
-    <p>Start date: {{tour.startDate | date:'mediumDate'}}</p>
-    <p>End date: {{tour.endDate  | date:'mediumDate'}}</p>
-    <p>Price: {{tour.price}} &#8364;</p>
-    <p>Opinion:  {{tour.opinion !== 0 ? tour.opinion : 'None opinion'}}</p>
+    <p>Name: <b> {{tour.name.toUpperCase()}}</b></p>
+    <p>Country: <b>   {{tour.country.toUpperCase()}}</b></p>
+    <p>Category:<b>  {{tour.category.toUpperCase()}}</b></p>
+    <p>Start date: <b> {{tour.startDate | date:'mediumDate'}}</b></p>
+    <p>End date: <b> {{tour.endDate  | date:'mediumDate'}}</b></p>
+    <p>Price:<b>  {{tour.price}} &#8364;</b></p>
+    <p>Opinion: <b>  {{tour.opinion !== 0 ? tour.opinion.toFixed(1) : 'None opinion'}}</b></p>
   </div>
   <div class="col-sm">
     {{tour.description}}
@@ -14,7 +15,9 @@
     <img [routerLink]="['/tour-detail', tour._id]" src="{{tour.pictureLink}}" class="rounded-circle mt-1" alt="Cinque Terre">
   </div>
   <div class="col-sm">
-    <p *ngIf="tour.places - tour.reservePlaces > 0"> Available places : {{tour.places - tour.reservePlaces}}</p>
+    <p *ngIf="tour.places - tour.reservePlaces > 0"> Available places : <b>{{tour.places - tour.reservePlaces}}</b></p>
+    <p> Reserved places : <b>{{tour.reservePlaces}}</b></p>
+    <p *ngIf="myReservedPlace!=undefined"> Reserved places by me : <b>{{myReservedPlace}}</b></p>
     <p class="text-danger" *ngIf="tour.places - tour.reservePlaces <= 0"> No spots left</p>
     <button *ngIf="isAdminView==true" type="button" class="btn btn-danger" (click)="deleteTour()">
       Delete

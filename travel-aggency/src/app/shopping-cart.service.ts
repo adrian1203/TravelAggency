@@ -65,8 +65,8 @@ export class ShoppingCartService {
         reservation.places = e.amount;
         user.reservation.push(reservation);
         this.tourService.updateTour(e.tour);
+        this.authenticationService.updateUser(user);
       });
-      this.authenticationService.updateUser(user);
     });
     this.clearCart();
   }

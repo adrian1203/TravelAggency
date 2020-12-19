@@ -14,9 +14,10 @@ export class TourComponent implements OnInit {
   @Output() reserve = new EventEmitter<void>();
   @Input() tour: Tour;
   @Input() isAdminView: boolean;
+  @Input() myReservedPlace: number;
 
 
-  constructor(private shoppingCartService: ShoppingCartService, private router : Router) {
+  constructor(private shoppingCartService: ShoppingCartService, private router: Router) {
   }
 
   ngOnInit() {

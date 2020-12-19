@@ -252,6 +252,7 @@ db.once('open', function () {
         user.lastName = req.body.lastName;
         user.role = req.body.role;
         user.save();
+        res.send(user);
     });
 
     //GET User by ID

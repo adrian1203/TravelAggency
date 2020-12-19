@@ -21,7 +21,7 @@
   </div>
 
   <div class="container border m-1"
-       *ngFor="let tour of tours">
-    <app-tour [tour]="tour" ></app-tour>
+       *ngFor="let reservation of currentUser.reservation">
+    <app-tour [tour]="reservation.tour" [myReservedPlace]="reservation.places" ></app-tour>
   </div>
 </div>

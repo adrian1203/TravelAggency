@@ -7,8 +7,11 @@
 
   </div>
   <div class="container ">
-    <app-filter *ngIf="isAdminView!=true && tours.length > 0" [tours]="tours" (categoryEvent)="filter($event)"></app-filter>
-
+    <app-filter *ngIf="isAdminView!=true && tours.length > 0 && resetFilterRequire==false"  [tours]="tours" (categoryEvent)="filter($event)"></app-filter>
+    <div *ngIf="resetFilterRequire==true">
+      <span>Sorry we haven't any tours with this criteria</span><br>
+      <button  type="submit" class="btn btn-primary" (click)="resetFilter()">Reset Criteria</button>
+    </div>
   </div>
 
   <div class="container border m-1"

@@ -27,8 +27,9 @@ export class BookedTourComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser.reservation.forEach(e => {
-      this.tourService.getTour(e.tourId).subscribe(e => {
-        this.tours.push(e);
+      this.tourService.getTour(e.tourId).subscribe(tour => {
+        this.tours.push(tour);
+        e.tour = tour;
       });
     });
 
