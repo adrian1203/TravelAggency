@@ -1,12 +1,12 @@
 <div class="container justify-content-center">
   <h2>Tour detail information</h2>
   <div class="m-2 row" >
-    <form *ngIf="tour.places - tour.reservePlaces > 0 && !isReserved">
+    <form *ngIf="tour?.places - tour?.reservePlaces > 0 && !isReserved">
       <h3>Reserve places</h3>
       <div class=" col form-group">
         <label class="form-control-label" >Number of places</label>
         <select class="form-control" [(ngModel)]="reservedPlaces" name="inpuList">
-          <option [ngValue]="number" *ngFor="let number of numbersArray(tour.places - tour.reservePlaces)"> {{number}} places</option>
+          <option [ngValue]="number" *ngFor="let number of numbersArray(tour?.places - tour?.reservePlaces)"> {{number}} places</option>
         </select>
       </div>
       <button type="submit" class="btn btn-success" (click)="reservePlace()">Submit</button>
@@ -22,19 +22,19 @@
   <div>
     <div class="col-8">
       <hr class="mt-2 mb-2">
-      <p>Name: <b> {{tour.name.toUpperCase()}} </b></p>
+      <p>Name: <b> {{tour?.name.toUpperCase()}} </b></p>
       <hr class="mt-2 mb-2">
-      <p>Country: <b>{{tour.country.toUpperCase()}} </b></p>
+      <p>Country: <b>{{tour?.country.toUpperCase()}} </b></p>
       <hr class="mt-2 mb-2">
-      <p>Category: <b>{{tour.category.toUpperCase()}} </b></p>
+      <p>Category: <b>{{tour?.category.toUpperCase()}} </b></p>
       <hr class="mt-2 mb-2">
-      <p>Start date: <b> {{tour.startDate | date:'mediumDate'}} </b></p>
+      <p>Start date: <b> {{tour?.startDate | date:'mediumDate'}} </b></p>
       <hr class="mt-2 mb-2">
-      <p>End date: <b> {{tour.endDate  | date:'mediumDate'}} </b></p>
+      <p>End date: <b> {{tour?.endDate  | date:'mediumDate'}} </b></p>
       <hr class="mt-2 mb-2">
-      <p>Price: <b> {{tour.price}} &#8364; </b></p>
+      <p>Price: <b> {{tour?.price}} &#8364; </b></p>
       <hr class="mt-2 mb-2">
-      <p>Opinion: <b> {{tour.opinion !== 0 ? tour.opinion +' with 5' : 'None opinion'}}  </b> </p>
+      <p>Opinion: <b> {{tour?.opinion !== 0 ? tour?.opinion +' with 5' : 'None opinion'}}  </b> </p>
     </div>
 
   </div>
@@ -50,7 +50,7 @@
 
       <div class="row text-center text-lg-left">
 
-        <div class="col-lg-3 col-md-4 col-6" *ngFor="let link of tour.gallery">
+        <div class="col-lg-3 col-md-4 col-6" *ngFor="let link of tour?.gallery">
           <a class="d-block mb-6 h-300">
             <img class="img-fluid img-thumbnail" src="{{link}}" alt="">
           </a>

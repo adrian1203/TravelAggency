@@ -9,7 +9,7 @@
       <div fxShow="true" fxHide.lt-md>
         <app-shopping-cart-view *ngIf="currentUser!=null"></app-shopping-cart-view>
         <a *ngIf="currentUser!=null " class="navbar-brand js-scroll-trigger" [routerLink]="['/booked-tour']">Booked
-          tour</a>
+          tours</a>
         <a *ngIf="currentUser!=null && currentUser.role ==='admin' " class="navbar-brand js-scroll-trigger"
            routerLink="/admin">Admin Panel</a>
         <a class="navbar-brand js-scroll-trigger"   (click)="logOut()"  [routerLink]="['/tour-list']">Log Out</a>
@@ -26,7 +26,7 @@
         <a (click)="sidenav.toggle()" href="" mat-list-item>Close</a>
         <app-shopping-cart-view *ngIf="currentUser!=null"></app-shopping-cart-view>
         <a *ngIf="currentUser!=null " class="navbar-brand js-scroll-trigger" [routerLink]="['/booked-tour']"
-           mat-list-item>Booked tour</a>
+           mat-list-item>Booked tours</a>
         <a *ngIf="currentUser!=null && currentUser.role ==='admin' " class="navbar-brand js-scroll-trigger"
            routerLink="/admin" mat-list-item>Admin Panel</a>
         <a class="navbar-brand js-scroll-trigger" (click)="logOut()" mat-list-item>Log Out</a>

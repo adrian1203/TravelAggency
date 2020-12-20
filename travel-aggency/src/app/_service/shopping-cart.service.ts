@@ -69,7 +69,6 @@ export class ShoppingCartService {
         });
         this.authenticationService.updateUser(user);
       });
-      this.alertService.success('Confirmed  reservation');
 
     });
     this.clearCart();
