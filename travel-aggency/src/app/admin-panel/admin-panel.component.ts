@@ -17,7 +17,6 @@ export class AdminPanelComponent implements OnInit {
   }
 
   startSale() {
-    console.log(this.message);
     this.saleService.startSaleRequest(this.message);
   }
 

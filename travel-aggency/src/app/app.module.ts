@@ -3,7 +3,6 @@ import {NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {HeaderComponent} from './header/header.component';
 import {TourListComponent} from './tour-list/tour-list.component';
 import {TourComponent} from './tour/tour.component';
 import {FormsModule} from '@angular/forms';
@@ -26,17 +25,16 @@ import {AngularFireModule} from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import {environment} from '../environments/environment';
 import { AlertComponent } from './alert/alert.component';
-import { ReservationPopupComponent } from './reservation-popup/reservation-popup.component';
 import { SaleComponent } from './sale/sale.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import {MatToolbarModule} from "@angular/material/toolbar";
-import {MatSidenavModule} from "@angular/material/sidenav";
-import {MatButtonModule} from "@angular/material/button";
-import {MatIconModule} from "@angular/material/icon";
-import {MatListModule} from "@angular/material/list";
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import {MatListModule} from '@angular/material/list';
 
 const config: SocketIoConfig = { url: 'http://localhost:5010', options: {} };
 
@@ -44,7 +42,6 @@ const config: SocketIoConfig = { url: 'http://localhost:5010', options: {} };
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
     TourListComponent,
     TourComponent,
     NewTourComponent,
@@ -56,7 +53,6 @@ const config: SocketIoConfig = { url: 'http://localhost:5010', options: {} };
     ShoppingCartViewComponent,
     AdminPanelComponent,
     AlertComponent,
-    ReservationPopupComponent,
     SaleComponent,
   ],
   imports: [

@@ -18,14 +18,11 @@ export class SaleComponent implements OnInit {
 
   ngOnInit(): void {
     this.docSub = this.saleService.startSale.subscribe(e => {
-      console.log('starteeee');
-      console.log(e);
       this.areSale = true;
       this.text = e;
 
     });
     this.docSub = this.saleService.endSale.subscribe(e => {
-      console.log(e);
       this.areSale = false;
       this.text = e;
 

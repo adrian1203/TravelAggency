@@ -102,7 +102,6 @@ export class FilterComponent implements OnInit {
 
   onDeSelectCategory(item: any) {
     this.selectedCategory = this.selectedCategory.filter(e => e !== item);
-    console.log('onDeSelect')
     if (this.selectedCategory.length === 0) {
       this.onSelectAllCategory();
     } else {
@@ -142,8 +141,6 @@ export class FilterComponent implements OnInit {
     if (this.selectedCategory.length === 0) {
       this.onSelectAllCategory();
     }
-    console.log('emit');
-    console.log(this.selectedCategory);
     const filter: TourFilter = new TourFilter();
     filter.category = this.selectedCategory;
     filter.minPrice = this.minValue;

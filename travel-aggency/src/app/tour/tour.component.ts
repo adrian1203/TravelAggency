@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CartElement, Tour} from '../model/app-models';
 import {ShoppingCartService} from '../_service/shopping-cart.service';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-tour',

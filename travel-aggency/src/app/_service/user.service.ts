@@ -4,6 +4,7 @@ import {AppUser, Tour} from '../model/app-models';
 import {AngularFireDatabase, AngularFireList} from "@angular/fire/database";
 import {Observable} from "rxjs";
 
+import {HttpHeaders} from '@angular/common/http';
 
 @Injectable({providedIn: 'root'})
 export class UserService {
@@ -14,9 +15,6 @@ export class UserService {
               private db: AngularFireDatabase) {
   }
 
-  getAll() {
-    return this.http.get<AppUser[]>(`/users`);
-  }
 
   register(user: AppUser, uid: string) {
     user._id = uid;
@@ -25,23 +23,27 @@ export class UserService {
 
   }
 
-  delete(id: number) {
-    return this.http.delete(`/users/${id}`);
+
+  public getUser(uid: string, token: string): Observable<AppUser> {
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': token
+      })
+    };
+
+    return this.http.get<AppUser>('http://localhost:5010/users/' + uid, httpOptions);
+
   }
 
-  public getUser(uid: string): Observable<AppUser> {
-
-    return this.http.get<AppUser>('http://localhost:5010/users/' + uid);
-
-    // return this.db.object('ztwprojekt/users/' + uid).valueChanges();
-
-
-  }
-
-  updateUser(user: AppUser) {
-    console.log(user);
+  updateUser(user: AppUser, token: string) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': token
+      })
+    };
     return this.http
-      .post<AppUser>('http://localhost:5010/users/' + user._id, user);
+      .post<AppUser>('http://localhost:5010/users/' + user._id, user, httpOptions);
 
   }
 }

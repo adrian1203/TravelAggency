@@ -1,11 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import {AppUser} from "../model/app-models";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {first} from "rxjs/operators";
-import {AuthenticationService} from "../_service/autentication.service";
-import {AlertService} from "../_service/alert.service";
-import {UserService} from "../_service/user.service";
+import {ActivatedRoute, Router} from '@angular/router';
+import {AppUser} from '../model/app-models';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AuthenticationService} from '../_service/autentication.service';
+import {AlertService} from '../_service/alert.service';
+import {UserService} from '../_service/user.service';
 
 @Component({
   selector: 'app-registration',
@@ -72,10 +71,8 @@ export class RegistrationComponent implements OnInit {
   }
 
   login(email: string, password: string) {
-    console.log('zalogowało');
     this.authenticationService.login(email, password)
       .then(data => {
-        console.log(data);
         this.alertService.success('Login successful', true);
         this.router.navigate(['./tour-list']);
 
@@ -111,7 +108,6 @@ export class RegistrationComponent implements OnInit {
       .catch(e => {
         this.alertService.error(e);
         this.loading = false;
-        console.log(false);
       });
   }
 }

@@ -12,7 +12,7 @@
       </div>
   </div>
 
-  <div class="container border m-1" style="border-color: darkblue"
+  <div  class="container border m-1" style="border-color: darkblue; border-width: 2px !important"
        [ngClass]=" tour.price == maxPrice ? 'border-success' : tour.price == minPrice ? 'border-danger' : 'border-dark'"
        *ngFor="let tour of tours">
     <app-tour (deleted)="deleteTour(tour)" (reserve)="countReservedPlaces()" [tour]="tour"

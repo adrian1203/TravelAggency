@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Tour} from '../model/app-models';
 import {ToursService} from '../_service/tours.service';
 import {ActivatedRoute, Router} from "@angular/router";
+import {AlertService} from "../_service/alert.service";
 
 
 @Component({
@@ -17,7 +18,7 @@ export class NewTourComponent implements OnInit {
   link: string;
   isEditing = false;
 
-  constructor(private tourService: ToursService,
+  constructor(private alertService: AlertService, private tourService: ToursService,
               private route: ActivatedRoute, private router: Router
   ) {
   }
@@ -44,6 +45,8 @@ export class NewTourComponent implements OnInit {
     this.tour.gallery = this.galleryLinks;
     this.tourService.updateTour(this.tour);
     this.router.navigate(['./tour-detail/' + this.toruId]);
+    this.alertService.success('Updated tours :' + this.tour.name);
+
 
   }
 

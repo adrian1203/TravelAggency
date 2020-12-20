@@ -1,8 +1,10 @@
 import {Injectable} from '@angular/core';
-import {AppUser, Tour, Vote} from '../model/app-models';
+import {Tour} from '../model/app-models';
 import {AngularFireDatabase, AngularFireList, AngularFireObject} from '@angular/fire/database';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {AuthenticationService} from './autentication.service';
+import {AlertService} from './alert.service';
 
 
 @Injectable({
@@ -14,15 +16,20 @@ export class ToursService {
   public data: AngularFireList<any[]>;
 
   constructor(private db: AngularFireDatabase,
-              private http: HttpClient) {
+              private http: HttpClient,
+              private authenticationService: AuthenticationService, private alertService: AlertService) {
   }
 
   createTour(tour: Tour) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: this.authenticationService.getToken()
+      })
+    };
     this.http
-      .post<Tour>('http://localhost:5010/tours', tour)
+      .post<Tour>('http://localhost:5010/tours', tour, httpOptions)
       .subscribe(e => {
-        return console.log(e);
-
+        this.alertService.success('Created tours :' + tour.name);
       });
   }
 
@@ -35,18 +42,29 @@ export class ToursService {
   }
 
   deleteTours(id: string) {
-    console.log(id);
-    this.http.delete('http://localhost:5010/tours/' + id).subscribe(e => console.log(e));
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: this.authenticationService.getToken()
+      })
+    };
+    this.http.delete('http://localhost:5010/tours/' + id, httpOptions).subscribe(e => {
+      this.alertService.success('Deleted tours');
+    });
   }
 
-  updateTour(tour: Tour) {
+  updateTour(tour: Tour): Observable<any> {
     if (tour.votes.length > 0) {
       let sum = 0;
       tour.votes.forEach(e => sum += e.vote);
       tour.opinion = sum / tour.votes.length;
     }
-    this.http.post<Tour>('http://localhost:5010/tours/' + tour._id, tour)
-      .subscribe(e => console.log(e));
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: this.authenticationService.getToken()
+      })
+    };
+    return this.http.post<Tour>('http://localhost:5010/tours/' + tour._id, tour, httpOptions);
+
   }
 
 

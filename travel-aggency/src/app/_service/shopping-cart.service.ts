@@ -4,6 +4,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {UserService} from "./user.service";
 import {AuthenticationService} from "./autentication.service";
 import {ToursService} from "./tours.service";
+import {AlertService} from "./alert.service";
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class ShoppingCartService {
   public cart: Observable<Cart>;
 
   constructor(private authenticationService: AuthenticationService,
-              private tourService: ToursService) {
+              private tourService: ToursService, private alertService: AlertService) {
     this.cartSubject = new BehaviorSubject<Cart>(JSON.parse(localStorage.getItem('cart')));
     this.cart = this.cartSubject.asObservable();
     if (this.cartSubject.value == null) {
@@ -64,9 +65,12 @@ export class ShoppingCartService {
         reservation.tourId = e.tour._id;
         reservation.places = e.amount;
         user.reservation.push(reservation);
-        this.tourService.updateTour(e.tour);
+        this.tourService.updateTour(e.tour).subscribe(e => {
+        });
         this.authenticationService.updateUser(user);
       });
+      this.alertService.success('Confirmed  reservation');
+
     });
     this.clearCart();
   }
