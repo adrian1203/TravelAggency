@@ -303,6 +303,10 @@ db.once('open', function () {
 			client.emit('startSale', 'start');
 			io.emit('startSale', 'start');
 			res.send(req.body)
+			// setTimeout(function() {
+			// 	client.emit('endSale', req.body);
+			// 	io.emit('endSale', req.body);
+			// }, 180000)
 		});
 
 		app.get('/sale-stop', (req, res) => {
