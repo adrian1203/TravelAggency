@@ -1,6 +1,6 @@
 <div class="container justify-content-center">
   <h2>Tour detail information</h2>
-  <div class="m-2 row" >
+  <div *ngIf="currentUser!=undefined" class="m-2 row" >
     <form *ngIf="tour?.places - tour?.reservePlaces > 0 && !isReserved">
       <h3>Reserve places</h3>
       <div class=" col form-group">
@@ -50,7 +50,7 @@
 
       <div class="row text-center text-lg-left">
 
-        <div class="col-lg-3 col-md-4 col-6" *ngFor="let link of tour?.gallery">
+        <div class="col-lg-3 col-md-4 col-6" *ngFor="let link of tour.gallery">
           <a class="d-block mb-6 h-300">
             <img class="img-fluid img-thumbnail" src="{{link}}" alt="">
           </a>
